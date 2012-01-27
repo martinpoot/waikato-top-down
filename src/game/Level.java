@@ -47,6 +47,18 @@ public class Level implements IDrawable {
 		start = Math.max(0, start-Speeds.background*delta/1000);
 		end = Math.max(height, end-Speeds.background*delta/1000);
 	}
-	
+
+	public int getMinXBounds() {
+		return 0;
+	}
+	public int getMaxXBounds() {
+		return width;
+	}
+	public int getMinYBounds() {
+		return 0;
+	}
+	public int getMaxYBounds() {
+		return height;
+	}
 
 }

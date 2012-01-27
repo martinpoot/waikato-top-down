@@ -6,9 +6,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import actor.KeyboardInput;
+import actor.Player;
+
 public class GameEngine extends BasicGame{
 
 	Level level;
+	Player player;
+	KeyboardInput input;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -20,13 +25,15 @@ public class GameEngine extends BasicGame{
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		level.render(g);
+		player.render(g);
 		
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		level = new Level(this,container,"res/background.jpg");
-		 
+		player = new Player(this, container, "res/player.png", level);
+		input = new KeyboardInput(player, container);
 		
 	}
 
@@ -34,6 +41,7 @@ public class GameEngine extends BasicGame{
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		level.updatePos(delta);
+		input.poll(delta);
 		
 	}
 
