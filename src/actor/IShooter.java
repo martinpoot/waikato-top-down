@@ -1,5 +1,9 @@
 package actor;
 
-public class IShooter {
+import game.GameEngine;
+
+public interface IShooter {
+	
+	public void shoot(GameEngine engine);
 
 }
