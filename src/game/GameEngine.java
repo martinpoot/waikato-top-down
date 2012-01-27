@@ -59,7 +59,7 @@ public class GameEngine extends BasicGame{
 		
 
 		for (Turret turret : turrets) {
-			//turret.
+			turret.shoot(delta);
 		}
 		
 		for (Bullet bullet : bullets) {
