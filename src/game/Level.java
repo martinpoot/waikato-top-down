@@ -9,6 +9,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import actor.IDrawable;
+import actor.movehelpers.IMoveHelper;
 
 public class Level implements IDrawable {
 	
@@ -22,8 +23,9 @@ public class Level implements IDrawable {
 	
 	private float start;
 	private float end;
+	private IMoveHelper myMoveHelper;
 	
-	public Level(GameEngine engine, GameContainer container,String backgroundPath) throws SlickException {
+	public Level(GameEngine engine, GameContainer container,String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
 		this.engine = engine;
 		this.container = container;
 		width = container.getWidth();
@@ -31,6 +33,7 @@ public class Level implements IDrawable {
 		background = new Image(backgroundPath);
 		start = background.getHeight()-height;
 		end = background.getHeight();
+		this.myMoveHelper = myMoveHelper;
 	}
 	
 	public void init(String background) {
@@ -44,8 +47,9 @@ public class Level implements IDrawable {
 	}
 	
 	public void updatePos(int delta) {
-		start = Math.max(0, start-Speeds.background*delta/1000);
-		end = Math.max(height, end-Speeds.background*delta/1000);
+		float shift = myMoveHelper.getShift(delta);
+		start = Math.max(0, start-shift);
+		end = Math.max(height, end-shift);
 	}
 
 	public int getMinXBounds() {
