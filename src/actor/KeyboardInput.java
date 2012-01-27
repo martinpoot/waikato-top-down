@@ -13,6 +13,7 @@ public class KeyboardInput implements InputFeeder {
 		this.container = container;
 	}
 	
+	@Override
 	public void poll(int delta) {
 		if(container.getInput().isKeyDown(Keyboard.KEY_LEFT)) {
 			myMovable.moveLeft(delta);

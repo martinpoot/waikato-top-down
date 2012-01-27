@@ -10,15 +10,18 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import actor.Bullet;
+import actor.InputFeeder;
 import actor.KeyboardInput;
 import actor.Player;
+import actor.ScrollingInputFeeder;
 import actor.Turret;
 
 public class GameEngine extends BasicGame{
 
 	Level level;
 	Player player;
-	KeyboardInput input;
+	InputFeeder input;
+	List<InputFeeder> inputFeeders;
 	List<Turret> turrets;
 	List<Bullet> bullets;
 	
@@ -40,15 +43,20 @@ public class GameEngine extends BasicGame{
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		level = new Level(this,container,"res/background.jpg");
-		player = new Player(this, container, "res/player.png", level);
+		level = new Level(this,container, Resources.background);
+		player = new Player(this, container, Resources.player, level);
 		input = new KeyboardInput(player, container);
 		
 		turrets = new ArrayList<Turret>();
-		turrets.add(new Turret(this, container, "res/turret.png", level, 10, 10));
+		turrets.add(new Turret(this, container, Resources.turret, level, 10, 10));
 		
 		bullets = new ArrayList<Bullet>();
 		
+		inputFeeders = new ArrayList<InputFeeder>();
+		
+		for (Turret turret: turrets) {
+			inputFeeders.add(new ScrollingInputFeeder(turret, container));
+		}
 	}
 
 	@Override
@@ -64,6 +72,10 @@ public class GameEngine extends BasicGame{
 		
 		for (Bullet bullet : bullets) {
 			//
+		}
+		
+		for (InputFeeder feeder : inputFeeders) {
+			feeder.poll(delta);
 		}
 		
 		
