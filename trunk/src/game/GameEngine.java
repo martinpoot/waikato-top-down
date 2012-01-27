@@ -8,6 +8,8 @@ import org.newdawn.slick.SlickException;
 
 public class GameEngine extends BasicGame{
 
+	Level level;
+	
 	public GameEngine(String title) {
 		super(title);
 		
@@ -17,20 +19,21 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		g.drawString("Hello world", 0, 100);
+		level.render(g);
 		
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
+		level = new Level(this,container,"res/background.jpg");
+		 
 		
 	}
 
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		level.updatePos(delta);
 		
 	}
 
