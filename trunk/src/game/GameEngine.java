@@ -1,19 +1,26 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import actor.Bullet;
 import actor.KeyboardInput;
 import actor.Player;
+import actor.Turret;
 
 public class GameEngine extends BasicGame{
 
 	Level level;
 	Player player;
 	KeyboardInput input;
+	List<Turret> turrets;
+	List<Bullet> bullets;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -26,7 +33,9 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		level.render(g);
 		player.render(g);
-		
+		for (Turret turret : turrets) {
+			turret.render(g);
+		}
 	}
 
 	@Override
@@ -35,6 +44,11 @@ public class GameEngine extends BasicGame{
 		player = new Player(this, container, "res/player.png", level);
 		input = new KeyboardInput(player, container);
 		
+		turrets = new ArrayList<Turret>();
+		turrets.add(new Turret(this, container, "res/turret.png", level, 10, 10));
+		
+		bullets = new ArrayList<Bullet>();
+		
 	}
 
 	@Override
@@ -42,6 +56,16 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		level.updatePos(delta);
 		input.poll(delta);
+		
+
+		for (Turret turret : turrets) {
+			//turret.
+		}
+		
+		for (Bullet bullet : bullets) {
+			//
+		}
+		
 		
 	}
 
@@ -55,5 +79,9 @@ public class GameEngine extends BasicGame{
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public void registerBullet(Bullet bullet) {
+		bullets.add(bullet);
 	}
 }
