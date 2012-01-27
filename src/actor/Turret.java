@@ -44,6 +44,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 			deltaSinceLast = 0;
 			engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition()));
 		}
+		
 	}
 
 	@Override

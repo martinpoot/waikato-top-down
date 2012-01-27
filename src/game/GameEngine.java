@@ -48,7 +48,10 @@ public class GameEngine extends BasicGame{
 		input = new KeyboardInput(player, container);
 		
 		turrets = new ArrayList<Turret>();
-		turrets.add(new Turret(this, container, Resources.turret, level, 10, 10));
+		for (int i = 0; i < 5; i++) {
+			turrets.add(new Turret(this, container, Resources.turretShootingDown, level, 
+					(float)(Math.random() * level.getMaxXBounds()), (float)(Math.random() * level.getMaxYBounds())));
+		}
 		
 		bullets = new ArrayList<Bullet>();
 		
