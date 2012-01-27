@@ -11,6 +11,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+import actor.movehelpers.IMoveHelper;
+import actor.movehelpers.ScrollingMovehelper;
+
 public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	
 	Image sprite;
@@ -20,15 +23,17 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	private GameContainer container;
 	private Level level;
 	
-	int deltaSinceLast;	
+	int deltaSinceLast;
+	private IMoveHelper myMoveHelper;	
 	
-	public Turret(GameEngine engine, GameContainer container, String graphicsLocation, Level level, float x, float y) throws SlickException {
+	public Turret(GameEngine engine, GameContainer container, String graphicsLocation, Level level, float x, float y, IMoveHelper moveHelper) throws SlickException {
 		sprite = new Image(graphicsLocation);
 		topY = y;
 		topX = x;
 		this.level = level;
 		this.engine = engine;
 		this.container = container;
+		this.myMoveHelper = moveHelper;
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	@Override
 	public void moveDown(int delta) {
-		topY += Speeds.background*delta/1000;
+		topY += myMoveHelper.getShift(delta);
 	}
 
 	@Override

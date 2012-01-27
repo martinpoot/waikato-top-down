@@ -15,6 +15,7 @@ import actor.KeyboardInput;
 import actor.Player;
 import actor.ScrollingInputFeeder;
 import actor.Turret;
+import actor.movehelpers.ScrollingMovehelper;
 
 public class GameEngine extends BasicGame{
 
@@ -43,14 +44,16 @@ public class GameEngine extends BasicGame{
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		level = new Level(this,container, Resources.background);
+		ScrollingMovehelper scroller = new ScrollingMovehelper();
+		level = new Level(this,container, Resources.background,scroller);
 		player = new Player(this, container, Resources.player, level);
 		input = new KeyboardInput(player, container);
 		
 		turrets = new ArrayList<Turret>();
+
 		for (int i = 0; i < 5; i++) {
 			turrets.add(new Turret(this, container, Resources.turretShootingDown, level, 
-					(float)(Math.random() * level.getMaxXBounds()), (float)(Math.random() * level.getMaxYBounds())));
+					(float)(Math.random() * level.getMaxXBounds()), (float)(Math.random() * level.getMaxYBounds()), scroller));
 		}
 		
 		bullets = new ArrayList<Bullet>();
