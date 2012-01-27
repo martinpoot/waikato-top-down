@@ -2,6 +2,7 @@ package actor;
 
 import game.GameEngine;
 import game.Level;
+import game.Resources;
 import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
@@ -35,8 +36,8 @@ public class Turret implements IDrawable, IShooter, IDamageable {
 	}
 
 	@Override
-	public void shoot(int delta) {
-		//engine.registerBullet(new Bullet(container, "", level, engine.getPlayer().getPosition()));
+	public void shoot(int delta) throws SlickException {
+		engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition()));
 	}
 
 }
