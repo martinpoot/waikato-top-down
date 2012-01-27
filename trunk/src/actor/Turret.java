@@ -11,7 +11,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Turret implements IDrawable, IShooter, IDamageable {
+public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	
 	Image sprite;
 	float topX;
@@ -44,6 +44,29 @@ public class Turret implements IDrawable, IShooter, IDamageable {
 			deltaSinceLast = 0;
 			engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition()));
 		}
+	}
+
+	@Override
+	public void moveLeft(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveRight(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveDown(int delta) {
+		topY += Speeds.background*delta/1000;
+	}
+
+	@Override
+	public void moveUp(int delta) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
