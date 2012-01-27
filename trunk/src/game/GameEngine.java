@@ -52,4 +52,8 @@ public class GameEngine extends BasicGame{
 		         app.setVSync(true);
 		         app.start();
 	}
+
+	public Player getPlayer() {
+		return player;
+	}
 }

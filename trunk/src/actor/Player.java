@@ -1,5 +1,6 @@
 package actor;
 
+
 import game.GameEngine;
 import game.Level;
 import game.Speeds;
@@ -8,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Player implements IDrawable,IMoveable {
 	
@@ -55,6 +57,10 @@ public class Player implements IDrawable,IMoveable {
 		float shift = Speeds.playerspeed*delta/1000;
 		topY = Math.max(level.getMinYBounds(),topY-shift);
 		
+	}
+
+	public Vector2f getPosition() {
+		return new Vector2f(topX, topY);
 	}
 
 }
