@@ -20,6 +20,7 @@ public class Turret implements IDrawable, IShooter, IDamageable {
 	private GameContainer container;
 	private Level level;
 	
+	int deltaSinceLast;	
 	
 	public Turret(GameEngine engine, GameContainer container, String graphicsLocation, Level level, float x, float y) throws SlickException {
 		sprite = new Image(graphicsLocation);
@@ -37,7 +38,12 @@ public class Turret implements IDrawable, IShooter, IDamageable {
 
 	@Override
 	public void shoot(int delta) throws SlickException {
-		engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition()));
+		deltaSinceLast += delta;
+		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed) {
+			System.out.println("pew pew!");
+			deltaSinceLast = 0;
+			engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition()));
+		}
 	}
 
 }
