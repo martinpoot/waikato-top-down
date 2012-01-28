@@ -35,7 +35,7 @@ public class Resources {
 	
 	
 	public static final String soundTurretHit = "res/music/recorded/popp.ogg";//"res/music/turret-hit.ogg";
-	public static final String soundTurretExplosion = "res/music/recorded/bang.ogg";//"res/music/explosion-sm.ogg";
+	public static final String soundTurretExplosion = "res/music/recorded/bang2.ogg";//"res/music/explosion-sm.ogg";
 	
 	public static final String soundPlayerExplosion = "res/music/recorded/nooo.ogg";//"res/music/player-dies.ogg";
 	public static final String soundPlayerShoot = "res/music/recorded/pew.ogg"; //"res/music/player-shoot.ogg";

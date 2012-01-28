@@ -82,4 +82,8 @@ public class Level implements IDrawable {
 		return getLevelHeight() - height*2-leveltransitionheight;
 	}
 
+	
+	public boolean isTransitionStarted() {
+		return start>=200;
+	}
 }

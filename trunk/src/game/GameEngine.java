@@ -102,7 +102,7 @@ public class GameEngine extends BasicGame{
 		else if (state == GameState.PLAYING) {
 			level.render(g);
 			
-			for(PlayerGhost ghost : ghosts) {
+			for(Player ghost : ghosts) {
 				ghost.render(g);
 			}
 			
@@ -213,6 +213,9 @@ public class GameEngine extends BasicGame{
 			feeder.poll(delta);
 		}
 		
+		if(level.isTransitionStarted()) {
+			player.setAlpha(player.getAlpha()-Speeds.playerFadeRate);
+		}
 		
 		if(towersGone && levelFinished) {
 			
