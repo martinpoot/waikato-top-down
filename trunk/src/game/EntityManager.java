@@ -48,12 +48,45 @@ public class EntityManager {
 		inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
 	}
 	
-	public void generateRandomTurrets() throws SlickException {
-		for (int i = 0; i < 50; i++) {
-			createTurret(
-					(float)(Math.random() * level.getMaxXBounds()), 
-					-(float)(Math.random() * (level.getLevelHeight() - level.getMaxYBounds())));
+	public void generateRandomTurrets(int numTurrets) throws SlickException {
+		for (int i = 0; i < numTurrets; i++) {
+			float x = (float)(Math.random() * level.getMaxXBounds());
+			float y = -(float)(Math.random() * (level.getLevelHeight() - level.getMaxYBounds()));
+			
+			createTurret(x, y);
 		}
+	}
+
+	
+	/**
+	 * Destroy things that shouldn't exist anymore.
+	 * Includes:
+	 * Bullets anywhere outside of view frame
+	 * Turrets below view frame
+	 */
+	public void destroyOffscreen() {
+		
+		List<Turret> turretsToRemove = new ArrayList<Turret>();
+		for(Turret turret : turrets) {
+			if (turret.getY() > level.getMaxYBounds()) {
+				turretsToRemove.add(turret);
+				System.out.println("Removing turret (below view)");
+			}
+		}
+		turrets.removeAll(turretsToRemove);
+		List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+		for(Bullet bullet : bullets) {
+			if (bullet.getX() < 0 || // left
+					bullet.getX() > level.getMaxXBounds() ||	// right
+					bullet.getY() > level.getMaxYBounds() ||	// below screen
+					bullet.getY() < 0	// above screen
+					) {
+				bulletsToRemove.add(bullet);
+				System.out.println("Removing bullet");
+			}
+		}
+		bullets.remove(bulletsToRemove);
+		bullets = bullets.subList(0, Math.min(bullets.size(), 100));
 	}
 	
 	

@@ -104,4 +104,12 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		
 	}
 
+	public float getX() {
+		return topX;
+	}
+	
+	public float getY() {
+		return topY;
+	}
+
 }
