@@ -86,7 +86,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 			Vector2f dir = new Vector2f(0, -1);
 			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 10);
 			try {
-				engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
+				engine.registerBullet(new Bullet(container, Resources.playerBullet, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
 						true, Damages.playerDamage));
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
