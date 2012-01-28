@@ -41,7 +41,7 @@ public class EntityManager {
 	public void generateRandomTurrets(int numTurrets) throws SlickException {
 		for (int i = 0; i < numTurrets; i++) {
 			float x = (float)(Math.random() * level.getMaxXBounds());
-			float y = -(float)(Math.random() * (level.getLevelHeight() - level.getMaxYBounds()));
+			float y = -(float)(Math.random() * (level.getEnemySpawnHeight() - level.getMaxYBounds()));
 			
 			Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
 					ScrollingMovehelper.getInstance());
