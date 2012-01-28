@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 
 
 import actor.Bullet;
+import actor.IDamageable;
 import actor.InputFeeder;
 import actor.KeyboardInput;
 import actor.Player;
@@ -111,4 +112,9 @@ public class EntityManager {
 	public void destroyBullet(Bullet bullet) {
 		bullets.remove(bullet);
 	}
+
+	public void destroyTurret(Turret turret) {
+		turrets.remove(turret);
+	}
+
 }

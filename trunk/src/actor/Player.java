@@ -13,7 +13,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-import actor.movehelpers.BulletMoveHelper;
 import actor.movehelpers.PlayerBulletMoveHelper;
 
 public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
@@ -36,7 +35,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		this.engine = engine;
 		this.container = container;
 		shotLast = 0;
-		health = 1000;
+		health = Damages.playerHealth;
 	}
 
 	@Override
