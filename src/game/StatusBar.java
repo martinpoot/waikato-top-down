@@ -1,5 +1,6 @@
 package game;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -27,11 +28,19 @@ public class StatusBar implements IDrawable {
 	public void render(Graphics g) {		
 		//bgHelper.render(g);
 		//sliderHelper.render(g);
+		Color originalColor = g.getColor();
+		g.setColor(Color.black);
+		g.fillRect(0, container.getHeight() - getHeight(), container.getWidth(), getHeight());
+		
+		g.setColor(Color.white);
+		
 		String score = "" + engine.getScore();
 		g.drawString(score, 10, y);
 		
 		String health = "" + engine.getPlayer().getHealth();
 		g.drawString(health, container.getWidth() - 10 - g.getFont().getWidth(health), y);
+		
+		g.setColor(originalColor);
 	}
 
 	public int getHeight() {
