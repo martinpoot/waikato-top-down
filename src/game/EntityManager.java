@@ -55,8 +55,23 @@ public class EntityManager {
 				newTurret.setX(newTurret.getX() - newTurret.getBoundingBox().getWidth());
 			}
 			
-			turrets.add(newTurret);
-			inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
+			boolean intersects = false;
+			
+			for (Turret turret: turrets) {
+				if (turret.getBoundingBox().intersects(newTurret.getBoundingBox())) {
+					intersects = true;
+					System.out.println("turret intersection");
+					break;
+				}
+			}
+			
+			if (!intersects) {
+				turrets.add(newTurret);
+				inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
+			}
+			else {
+				i--;
+			}
 		}
 	}
 
