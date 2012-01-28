@@ -118,7 +118,6 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	@Override
 	public void takeDamage(float damageRating) {
 		health -= damageRating;
-		System.out.println("turret is hit! health is " + health);
 	}
 
 	@Override
@@ -131,7 +130,6 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	}
 
 	public void setX(float x) {
-		// TODO Auto-generated method stub
 		imagehelper.setTopX(x);
 	}
 

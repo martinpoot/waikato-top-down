@@ -40,6 +40,7 @@ public class GameEngine extends BasicGame{
 	private List<List<boolean[]>> playbackInputs = new ArrayList<List<boolean[]>>();
 	private ArrayList<PlayerGhost> ghosts;
 	private ArrayList<PlaybackInput> ghostInputs;
+	private StatusBar statusBar;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -99,6 +100,8 @@ public class GameEngine extends BasicGame{
 				bullet.render(g);
 			}
 			player.render(g);
+			
+			statusBar.render(g);
 		}
 		else if(state == GameState.GAME_OVER) {
 			g.drawString("Game over man, game over", 50, 50);
@@ -107,18 +110,21 @@ public class GameEngine extends BasicGame{
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		level = new Level(this,container, Resources.background,ScrollingMovehelper.getInstance());
-		player = new Player(this, container, Resources.player, level);
+		statusBar = new StatusBar(this, container, Resources.statusBackground, Resources.statusSlider);
+		int statusHeight = statusBar.getHeight();
+		
+		level = new Level(this,container, statusHeight, Resources.background,ScrollingMovehelper.getInstance());
+		player = new Player(this, container, statusHeight, Resources.player, level);
 		ghosts = new ArrayList<PlayerGhost>();
 		ghostInputs = new ArrayList<PlaybackInput>();
 		for(List<boolean[]> inputRecording : playbackInputs) {
-			PlayerGhost ghost = new PlayerGhost(this,container,Resources.player,level);
+			PlayerGhost ghost = new PlayerGhost(this,container, statusHeight, Resources.player,level);
 			ghosts.add(ghost);
 			ghostInputs.add(new PlaybackInput(ghost,inputRecording));
 		}
 		playerInput = new KeyboardInput(player, container);
 		
-		entityManager = new EntityManager(this, container, level);
+		entityManager = new EntityManager(this, container,level);
 		
 		entityManager.generateRandomTurrets(50);
 		
@@ -263,5 +269,9 @@ public class GameEngine extends BasicGame{
 	
 	public void towersGone(boolean status) {
 		towersGone = status;
+	}
+
+	public int getScore() {
+		return score;
 	}
 }
