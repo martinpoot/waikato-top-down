@@ -70,11 +70,12 @@ public class EntityManager {
 		for(Turret turret : turrets) {
 			if (turret.getY() > level.getMaxYBounds()) {
 				turretsToRemove.add(turret);
-				System.out.println("Removing turret (below view)");
 			}
 		}
 		turrets.removeAll(turretsToRemove);
+		
 		List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+		
 		for(Bullet bullet : bullets) {
 			if (bullet.getX() < 0 || // left
 					bullet.getX() > level.getMaxXBounds() ||	// right
@@ -82,11 +83,11 @@ public class EntityManager {
 					bullet.getY() < 0	// above screen
 					) {
 				bulletsToRemove.add(bullet);
-				System.out.println("Removing bullet");
 			}
 		}
-		bullets.remove(bulletsToRemove);
-		bullets = bullets.subList(0, Math.min(bullets.size(), 100));
+		
+		bullets.removeAll(bulletsToRemove);
+
 	}
 	
 	
