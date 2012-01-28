@@ -17,23 +17,28 @@ import org.newdawn.slick.geom.Vector2f;
 import actor.movehelpers.PlayerBulletMoveHelper;
 
 public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
-	
+	  
 	protected Level level;
 	protected GameEngine engine;
 	protected GameContainer container;
 	protected int shotLast;
 	protected ImageHelper imagehelper;
 	private int health;
+	private int maxHeight;
 
 	
-	public Player(GameEngine engine, GameContainer container, int bottomMargin, String graphicsLocation,Level level) throws SlickException {
-		imagehelper = new ImageHelper(graphicsLocation);
-		imagehelper.setTopY((float) (level.getMaxYBounds()-imagehelper.getHeight()));
-		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
-		
+	public Player(GameEngine engine, GameContainer container, int bottomMargin, String graphicsLocation,Level level, int reservedBottomSpace) throws SlickException {
 		this.level = level;
 		this.engine = engine;
 		this.container = container;
+		
+		imagehelper = new ImageHelper(graphicsLocation);
+		
+		maxHeight = level.getMaxYBounds() - reservedBottomSpace;
+		
+		imagehelper.setTopY((float) (maxHeight-imagehelper.getHeight()));
+		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
+		
 		shotLast = 0;
 		health = Damages.playerHealth;
 	}
@@ -61,7 +66,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	@Override
 	public void moveDown(int delta) {
 		float shift = Speeds.playerspeed*delta/1000;
-		imagehelper.setTopY(Math.min(level.getMaxYBounds()-imagehelper.getHeight(), imagehelper.getTopY()+shift));
+		imagehelper.setTopY(Math.min(maxHeight-imagehelper.getHeight(), imagehelper.getTopY()+shift));
 	}
 
 	@Override
