@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.filechooser.FileFilter;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -43,17 +46,22 @@ public class EntityManager {
 	}
 	
 	public void loadSavedTurrets() {
-		File levelDir = Resources.getFile(Resources.levelDirectory);	// This needs to be moved to Resources
-		String[] fileNames = levelDir.list();
-		// Temporary, this will need to be randomized
+		File levelDir = Resources.getFile(Resources.levelDirectory);
+		File[] files = levelDir.listFiles(new FilenameFilter () {
+			@Override
+			public boolean accept(File dir, String name) {
+				if (name.endsWith(".csv")) return true;
+				return false;
+			}
+		});
 		
 		int numLevelsRequired = level.getEnemySpawnHeight() / level.getMaxYBounds();
 		while (numLevelsRequired-- > 0) {
-			int nextLevel = (int)(Math.random() * 10) % fileNames.length;
-			String fileName = fileNames[nextLevel];
+			int nextLevel = (int)(Math.random() * 10) % files.length;
+			File file = files[nextLevel];
 			
 			try {
-				FileReader istream = new FileReader(Resources.levelDirectory + fileName);
+				FileReader istream = new FileReader(file);
 				BufferedReader in = new BufferedReader(istream);
 				String line = in.readLine();
 				while (line != null) {
@@ -68,7 +76,6 @@ public class EntityManager {
 				}
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
