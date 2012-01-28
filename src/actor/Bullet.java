@@ -41,5 +41,13 @@ public class Bullet implements IDrawable {
 		System.out.println("render bullet");
 		imagehelper.render(g);
 	}
+	
+	public float getX() {
+		return imagehelper.getTopX() + (imagehelper.getWidth() / 2);
+	}
+	
+	public float getY() {
+		return imagehelper.getTopY() + (imagehelper.getHeight() / 2);
+	}
 
 }
