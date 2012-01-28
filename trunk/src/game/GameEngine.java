@@ -113,8 +113,12 @@ public class GameEngine extends BasicGame{
 		statusBar = new StatusBar(this, container, Resources.statusBackground, Resources.statusSlider);
 		int statusHeight = statusBar.getHeight();
 		
+		int reservedBottomSpace = 0;
+		if (playbackInputs != null && !playbackInputs.isEmpty()) {
+			reservedBottomSpace = 91;
+		}
 		level = new Level(this,container, statusHeight, Resources.background,ScrollingMovehelper.getInstance());
-		player = new Player(this, container, statusHeight, Resources.player, level);
+		player = new Player(this, container, statusHeight, Resources.player, level, reservedBottomSpace);
 		ghosts = new ArrayList<PlayerGhost>();
 		ghostInputs = new ArrayList<PlaybackInput>();
 		for(List<boolean[]> inputRecording : playbackInputs) {

@@ -16,7 +16,7 @@ public class PlayerGhost extends Player {
 
 	public PlayerGhost(GameEngine engine, GameContainer container,
 			int bottomMargin, String graphicsLocation, Level level) throws SlickException {
-		super(engine, container, bottomMargin, graphicsLocation, level);
+		super(engine, container, bottomMargin, graphicsLocation, level, 0);
 		this.imagehelper.setAlpha(0.3f);
 	}
 
