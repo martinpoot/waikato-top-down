@@ -148,7 +148,8 @@ public class GameEngine extends BasicGame{
 		
 		entityManager = new EntityManager(this, container,level);
 		
-		entityManager.generateRandomTurrets(Damages.initialTurretCount + round * Damages.turretIncreaseRate);
+		//entityManager.generateRandomTurrets(Damages.initialTurretCount + round * Damages.turretIncreaseRate);
+		entityManager.loadSavedTurrets();
 		
 		
 	}
