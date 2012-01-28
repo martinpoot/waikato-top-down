@@ -208,9 +208,11 @@ public class GameEngine extends BasicGame{
 				Rectangle turretBB = turret.getBoundingBox();
 				if (turretBB.intersects(bulletBB)) {
 					turret.takeDamage(bullet.getDamageRating());
+					SoundEffectManager.getInstance().turretHit();
 					if (turret.getHealth() <= 0) {
 						score +=turret.getScoreValue();
 						entityManager.destroyTurret(turret);
+						SoundEffectManager.getInstance().turretExplosion();
 					}
 					entityManager.destroyBullet(bullet);
 				}
@@ -219,8 +221,10 @@ public class GameEngine extends BasicGame{
 			if (bullet.getBoundingBox().intersects(player.getBoundingBox())) {
 				player.takeDamage(bullet.getDamageRating());
 				entityManager.destroyBullet(bullet);
+				SoundEffectManager.getInstance().playerHit();
 				if (player.getHealth() <= 0) {
 					System.out.println("player dies");
+					SoundEffectManager.getInstance().playerExplosion();
 					gameOver = true;
 				}
 			}
@@ -228,6 +232,7 @@ public class GameEngine extends BasicGame{
 			// we know it's a bullet that can potentially hurt the player
 			Rectangle playerBB = player.getBoundingBox();
 			if (playerBB.intersects(bulletBB)) {
+				SoundEffectManager.getInstance().playerHit();
 				if (!isGodMode()) {
 					player.takeDamage(bullet.getDamageRating());
 					if (player.getHealth() <= 0) {
