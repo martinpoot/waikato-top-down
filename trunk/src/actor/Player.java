@@ -111,12 +111,4 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		return health;
 	}
 
-	public void addScore(int points) {
-		score += points;
-	}
-	
-	public int getScore() {
-		return score;
-	}
-
 }
