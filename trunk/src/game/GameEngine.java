@@ -182,7 +182,10 @@ public class GameEngine extends BasicGame{
 		
 		entityManager.destroyOffscreen();
 
-		for (Turret turret : entityManager.getTurrets()) {
+		List<Turret> turrets = new ArrayList<Turret>();
+		turrets.addAll(entityManager.getTurrets());
+		for (Turret turret : turrets) {
+			if (Damages.turretCollision) detectCollisions(turret);
 			turret.shoot(delta);
 		}
 		
@@ -219,6 +222,21 @@ public class GameEngine extends BasicGame{
 		init(container);
 		
 	}
+	
+	private void detectCollisions(Turret turret) {
+		if (turret.getBoundingBox().intersects(player.getBoundingBox())) {
+			turret.takeDamage(Damages.collisionModifier * Damages.playerDamage);
+			player.takeDamage(Damages.collisionModifier * Damages.turretDamage);
+			if (turret.getHealth() < 0) {
+				entityManager.destroyTurret(turret);
+				SoundEffectManager.getInstance().playerCollision();
+			}
+			if (player.getHealth() < 0) {
+				gameOver = true;
+				SoundEffectManager.getInstance().playerExplosion();
+			}
+		}
+	}
 
 	private void detectCollisions(Bullet bullet) {
 		Rectangle bulletBB = bullet.getBoundingBox();
@@ -245,7 +263,6 @@ public class GameEngine extends BasicGame{
 				entityManager.destroyBullet(bullet);
 				SoundEffectManager.getInstance().playerHit();
 				if (player.getHealth() <= 0) {
-					System.out.println("player dies");
 					SoundEffectManager.getInstance().playerExplosion();
 					gameOver = true;
 				}

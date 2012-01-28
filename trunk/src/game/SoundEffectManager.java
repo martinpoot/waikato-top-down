@@ -53,4 +53,9 @@ public class SoundEffectManager {
 		playerShoots.play();
 	}
 
+	public void playerCollision() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
