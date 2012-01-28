@@ -37,10 +37,12 @@ public class GameEngine extends BasicGame{
 	private Music music;
 	private GameState state;
 	
+
 	private List<List<boolean[]>> playbackInputs = new ArrayList<List<boolean[]>>();
 	private ArrayList<PlayerGhost> ghosts;
 	private ArrayList<PlaybackInput> ghostInputs;
 	private StatusBar statusBar;
+	private int gameoverwaited;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -140,9 +142,18 @@ public class GameEngine extends BasicGame{
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		
+		
 		switch(state) {
-		case TITLE:
+
 		case GAME_OVER:
+			gameoverwaited += delta;
+			
+			if(container.getInput().isKeyPressed(Input.KEY_SPACE) && gameoverwaited >= 2000) {
+				gameoverwaited = 0;
+				stateTransition(container);
+			}
+			break;
+		case TITLE:
 			if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
 				stateTransition(container);
 			}
@@ -190,6 +201,7 @@ public class GameEngine extends BasicGame{
 		
 		if(gameOver) {
 			gameOver = false;
+			gameoverwaited = 0;
 			stateTransition(container);
 		}
 	}
