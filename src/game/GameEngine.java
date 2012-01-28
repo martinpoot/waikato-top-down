@@ -44,6 +44,8 @@ public class GameEngine extends BasicGame{
 	private ArrayList<PlaybackInput> ghostInputs;
 	private StatusBar statusBar;
 	private SplashScreen splashScreen;
+	private GameOverScreen gameOverScreen;
+	
 	private int gameoverwaited;
 	
 	public GameEngine(String title) {
@@ -95,8 +97,6 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		if(state == GameState.TITLE) {
 			splashScreen.render(g);
-			//g.drawString("The Game",50,50);
-			//g.drawString("Press Space to Play",50,100);
 			
 		}
 		else if (state == GameState.PLAYING) {
@@ -117,13 +117,14 @@ public class GameEngine extends BasicGame{
 			statusBar.render(g);
 		}
 		else if(state == GameState.GAME_OVER) {
-			g.drawString("Game over man, game over", 50, 50);
+			gameOverScreen.render(g);
 		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		splashScreen = new SplashScreen(this, container, Resources.splashImage);
+		gameOverScreen = new GameOverScreen(this, container, Resources.gameOverImage);
 		
 		statusBar = new StatusBar(this, container, Resources.statusBackground, Resources.statusSlider);
 		int statusHeight = statusBar.getHeight();
@@ -331,5 +332,10 @@ public class GameEngine extends BasicGame{
 
 	public int getScore() {
 		return score;
+	}
+
+
+	public int getRound() {
+		return round;
 	}
 }
