@@ -145,6 +145,7 @@ public class GameEngine extends BasicGame{
 				if (turretBB.intersects(bulletBB)) {
 					turret.takeDamage(bullet.getDamageRating());
 					if (turret.getHealth() <= 0) {
+						player.addScore(turret.getScoreValue());
 						entityManager.destroyTurret(turret);
 					}
 					entityManager.destroyBullet(bullet);
