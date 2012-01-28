@@ -57,7 +57,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 			
 			Vector2f dir = targetPos.sub(startPos).normalise();
 			
-			engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,BulletMoveHelper.getInstance(), false, Damages.turretDamage));
+			engine.registerBullet(new Bullet(container, Resources.turretBullet, level, startPos,dir,BulletMoveHelper.getInstance(), false, Damages.turretDamage));
 		}
 		
 	}

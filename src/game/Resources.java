@@ -8,7 +8,10 @@ import org.newdawn.slick.SlickException;
 
 public class Resources {
 	
-	public final static String bullet1 = "res/bullet.png";
+	public final static String playerBullet = "res/bullet-purple.png";
+	public final static String ghostBullet = "res/bullet-yellow.png";
+	public final static String turretBullet = "res/bullet-green.png";
+	
 	public final static String turretShootingDown = "res/turret-shooting-down.png";
 	public final static String turretShootingUp = "res/turret-shooting-up.png";
 	public final static String turretShootingRight = "res/turret-shooting-right.png";
