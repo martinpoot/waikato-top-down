@@ -1,6 +1,10 @@
 package game;
 
 import java.net.URL;
+import java.util.Hashtable;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Resources {
 	
@@ -21,4 +25,12 @@ public class Resources {
 	public static final String soundPlayerShoot = "res/music/player-shoot.ogg";
 	
 
+	private static Hashtable<String,Image> sprites = new Hashtable<String,Image>();
+	
+	public static Image getSprite(String spriteResource) throws SlickException {
+		if(!sprites.contains(spriteResource)) {
+			sprites.put(spriteResource,new Image(spriteResource));
+		}
+		return sprites.get(spriteResource).copy();
+	}
 }
