@@ -34,10 +34,13 @@ public class StatusBar implements IDrawable {
 		
 		g.setColor(Color.white);
 		
-		String score = "" + engine.getScore();
+		String score = "Score: " + engine.getScore();
 		g.drawString(score, 10, y);
 		
-		String health = "" + engine.getPlayer().getHealth();
+
+		int level = engine.getRound() + 1;
+		
+		String health = engine.getPlayer().getHealth() + " Health";
 		g.drawString(health, container.getWidth() - 10 - g.getFont().getWidth(health), y);
 		
 		g.setColor(originalColor);
