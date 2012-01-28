@@ -105,4 +105,8 @@ public class EntityManager {
 	public List<Bullet> getBullets() {
 		return bullets;
 	}
+
+	public void destroyBullet(Bullet bullet) {
+		bullets.remove(bullet);
+	}
 }

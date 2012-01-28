@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -63,7 +66,9 @@ public class GameEngine extends BasicGame{
 			turret.shoot(delta);
 		}
 		
-		for (Bullet bullet : entityManager.getBullets()) {
+		List<Bullet> bullets = new ArrayList<Bullet>();
+		bullets.addAll(entityManager.getBullets());
+		for (Bullet bullet : bullets) {
 			bullet.advance(delta);
 			detectCollisions(bullet);
 		}
@@ -85,7 +90,7 @@ public class GameEngine extends BasicGame{
 			Rectangle playerBB = player.getBoundingBox();
 			if (playerBB.intersects(bullet.getBoundingBox())) {
 				player.takeDamage(bullet.getDamageRating());
-				System.out.println("boom!");
+				entityManager.destroyBullet(bullet);
 			}
 		}
 	}
