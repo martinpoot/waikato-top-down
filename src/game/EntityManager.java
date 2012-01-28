@@ -1,18 +1,13 @@
 package game;
 
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
-
 import actor.Bullet;
-import actor.IDamageable;
 import actor.InputFeeder;
-import actor.KeyboardInput;
-import actor.Player;
 import actor.ScrollingInputFeeder;
 import actor.Turret;
 import actor.movehelpers.ScrollingMovehelper;
@@ -60,7 +55,6 @@ public class EntityManager {
 			for (Turret turret: turrets) {
 				if (turret.getBoundingBox().intersects(newTurret.getBoundingBox())) {
 					intersects = true;
-					System.out.println("turret intersection");
 					break;
 				}
 			}

@@ -27,11 +27,11 @@ public class Level implements IDrawable {
 	
 	public long randomSeed;
 	
-	public Level(GameEngine engine, GameContainer container,String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
+	public Level(GameEngine engine, GameContainer container, int bottomMargin, String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
 		this.engine = engine;
 		this.container = container;
 		width = container.getWidth();
-		height = container.getHeight();
+		height = container.getHeight() - bottomMargin;
 		background = new Image(backgroundPath);
 		start = background.getHeight()-height;
 		end = background.getHeight();

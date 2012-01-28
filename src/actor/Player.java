@@ -26,7 +26,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	private int score;
 
 	
-	public Player(GameEngine engine, GameContainer container, String graphicsLocation,Level level) throws SlickException {
+	public Player(GameEngine engine, GameContainer container, int bottomMargin, String graphicsLocation,Level level) throws SlickException {
 		imagehelper = new ImageHelper(graphicsLocation);
 		imagehelper.setTopY((float) (level.getMaxYBounds()-imagehelper.getHeight()));
 		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
@@ -103,7 +103,6 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	@Override
 	public void takeDamage(float damageRating) {
 		health -= damageRating;
-		System.out.println("I'm hit! health is " + health);
 	}
 
 	@Override
