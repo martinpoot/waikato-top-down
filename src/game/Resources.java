@@ -18,6 +18,7 @@ public class Resources {
 	public static final String backgroundMusic = "res/music/music.ogg";
 	public static final String statusBackground = "res/status-background.png";
 	public static final String statusSlider = "res/status-slider.png";
+	public static final String splashImage = "res/splash-image.png";
 	
 	public static final String soundTurretHit = "res/music/turret-hit.ogg";
 	public static final String soundTurretExplosion = "res/music/explosion-sm.ogg";
