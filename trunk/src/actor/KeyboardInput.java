@@ -28,6 +28,9 @@ public class KeyboardInput implements InputFeeder {
 		if(container.getInput().isKeyDown(Keyboard.KEY_DOWN)) {
 			player.moveDown(delta);
 		}
+		
+		player.addDelta(delta);
+		
 		if(container.getInput().isKeyDown(Keyboard.KEY_SPACE) || container.getInput().isKeyPressed(Keyboard.KEY_SPACE)){
 			player.shoot(delta);
 		}
