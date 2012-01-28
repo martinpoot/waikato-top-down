@@ -28,6 +28,7 @@ public class GameEngine extends BasicGame{
 	KeyboardInput playerInput;
 	
 	private int score = 0;
+	private int round = 0;	// How many runs through is the player (0 == 0 ghosts)
 	
 	EntityManager entityManager;
 	private boolean godMode;
@@ -67,8 +68,8 @@ public class GameEngine extends BasicGame{
 	private void restartGame(GameContainer container) throws SlickException {
 		playbackInputs = new ArrayList<List<boolean[]>>();
 		score = 0;
+		round = 0;
 		init(container);
-		
 	}
 
 
@@ -134,7 +135,7 @@ public class GameEngine extends BasicGame{
 		
 		entityManager = new EntityManager(this, container,level);
 		
-		entityManager.generateRandomTurrets(50);
+		entityManager.generateRandomTurrets(Damages.initialTurretCount + round * Damages.turretIncreaseRate);
 		
 		music = new Music("res/music/music.ogg");
 		music.loop();
@@ -214,6 +215,7 @@ public class GameEngine extends BasicGame{
 		while (playbackInputs.size() > 10) {
 			playbackInputs.remove(0);
 		}
+		round++;
 		init(container);
 		
 	}
