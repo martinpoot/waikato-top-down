@@ -16,13 +16,14 @@ import org.newdawn.slick.geom.Vector2f;
 import actor.movehelpers.BulletMoveHelper;
 import actor.movehelpers.PlayerBulletMoveHelper;
 
-public class Player implements IDrawable,IMoveable, IShooter {
+public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	
 	private Level level;
 	GameEngine engine;
 	GameContainer container;
 	private int shotLast;
 	private ImageHelper imagehelper;
+	private int health;
 
 	
 	public Player(GameEngine engine, GameContainer container, String graphicsLocation,Level level) throws SlickException {
@@ -34,6 +35,7 @@ public class Player implements IDrawable,IMoveable, IShooter {
 		this.engine = engine;
 		this.container = container;
 		shotLast = 0;
+		health = 1000;
 	}
 
 	@Override
@@ -96,6 +98,17 @@ public class Player implements IDrawable,IMoveable, IShooter {
 	
 	public void addDelta(int delta){
 		shotLast += delta;
+	}
+
+	@Override
+	public void takeDamage(float damageRating) {
+		health -= damageRating;
+		System.out.println("I'm hit! health is " + health);
+	}
+
+	@Override
+	public int getHealth() {
+		return health;
 	}
 
 }

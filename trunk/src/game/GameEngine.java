@@ -84,6 +84,7 @@ public class GameEngine extends BasicGame{
 			// we know it's a bullet that can potentially hurt the player
 			Rectangle playerBB = player.getBoundingBox();
 			if (playerBB.intersects(bullet.getBoundingBox())) {
+				player.takeDamage(bullet.getDamageRating());
 				System.out.println("boom!");
 			}
 		}
