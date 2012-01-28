@@ -7,15 +7,18 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Bullet implements IDrawable, IMoveable{
+import actor.movehelpers.IMoveHelper;
+
+public class Bullet implements IDrawable {
 
 	Level level;
 	private ImageHelper imagehelper;
 	private Vector2f direction;
+	private IMoveHelper moveHelper;
+	float topY, topX;
 	
-	
-	public Bullet(GameContainer container, String graphicsLocation,Level level, Vector2f direction) throws SlickException{
-		float topY, topX;
+	public Bullet(GameContainer container, String graphicsLocation,Level level, Vector2f direction,IMoveHelper moveHelper) throws SlickException{
+		
 		this.direction = direction;
 
 		imagehelper = new ImageHelper(graphicsLocation);
@@ -24,31 +27,13 @@ public class Bullet implements IDrawable, IMoveable{
 		imagehelper.setTopX(topX);
 		imagehelper.setTopY(topY);
 		this.level = level;
+		this.moveHelper = moveHelper;
 		
 	}
 	
-	@Override
-	public void moveLeft(int delta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void moveRight(int delta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void moveDown(int delta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void moveUp(int delta) {
-		// TODO Auto-generated method stub
-		
+	public void advance(int delta) {
+		topX += moveHelper.getShift(delta)*direction.getX();
+		topY += moveHelper.getShift(delta)*direction.getY();
 	}
 
 	@Override

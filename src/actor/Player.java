@@ -60,7 +60,7 @@ public class Player implements IDrawable,IMoveable {
 	}
 
 	public Vector2f getPosition() {
-		return new Vector2f(topX, topY);
+		return new Vector2f(topX+sprite.getWidth()/2, topY+sprite.getHeight()/2);
 	}
 
 }
