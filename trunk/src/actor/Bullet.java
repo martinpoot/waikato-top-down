@@ -15,11 +15,12 @@ public class Bullet implements IDrawable {
 	private ImageHelper imagehelper;
 	private Vector2f direction;
 	private IMoveHelper moveHelper;
+	private boolean firedByPlayer;
+	private float damageRating;
 	
 	
-	public Bullet(GameContainer container, String graphicsLocation,Level level, Vector2f startPos, Vector2f direction,IMoveHelper moveHelper) throws SlickException{
-		
-		
+	public Bullet(GameContainer container, String graphicsLocation,Level level, 
+			Vector2f startPos, Vector2f direction,IMoveHelper moveHelper, boolean firedByPlayer, float damageRating) throws SlickException{
 		this.direction = direction;
 		imagehelper = new ImageHelper(graphicsLocation);
 		
@@ -27,6 +28,9 @@ public class Bullet implements IDrawable {
 		imagehelper.setTopY(startPos.getY());
 		this.level = level;
 		this.moveHelper = moveHelper;
+		
+		this.firedByPlayer = firedByPlayer;
+		this.damageRating = damageRating;
 		
 	}
 	
