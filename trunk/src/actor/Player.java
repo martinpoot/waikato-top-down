@@ -21,7 +21,7 @@ public class Player implements IDrawable,IMoveable, IShooter {
 	private Level level;
 	GameEngine engine;
 	GameContainer container;
-	private int deltaSum;
+	private int shotLast;
 	private ImageHelper imagehelper;
 
 	
@@ -33,7 +33,7 @@ public class Player implements IDrawable,IMoveable, IShooter {
 		this.level = level;
 		this.engine = engine;
 		this.container = container;
-		deltaSum = 0;
+		shotLast = 0;
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class Player implements IDrawable,IMoveable, IShooter {
 
 	@Override
 	public void shoot(int delta) {
-		deltaSum += delta;
-		if (deltaSum >= 1000 / Speeds.playerFireSpeed){
+		shotLast += delta;
+		if (shotLast >= 1000 / Speeds.playerFireSpeed){
 			Vector2f dir = new Vector2f(0, -1);
 			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 1);
 			try {
@@ -85,13 +85,17 @@ public class Player implements IDrawable,IMoveable, IShooter {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			deltaSum = 0;
+			shotLast = 0;
 		}
 	}
 
 
 	public Rectangle getBoundingBox() {
 		return imagehelper.getBoundingBox();
+	}
+	
+	public void addDelta(int delta){
+		shotLast += delta;
 	}
 
 }
