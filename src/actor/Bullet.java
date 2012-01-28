@@ -15,30 +15,30 @@ public class Bullet implements IDrawable {
 	private ImageHelper imagehelper;
 	private Vector2f direction;
 	private IMoveHelper moveHelper;
-	float topY, topX;
 	
-	public Bullet(GameContainer container, String graphicsLocation,Level level, Vector2f direction,IMoveHelper moveHelper) throws SlickException{
+	
+	public Bullet(GameContainer container, String graphicsLocation,Level level, Vector2f startPos, Vector2f direction,IMoveHelper moveHelper) throws SlickException{
+		
 		
 		this.direction = direction;
-
 		imagehelper = new ImageHelper(graphicsLocation);
-		topY = level.getMaxYBounds()-imagehelper.getHeight();
-		topX = (level.getMaxXBounds()-imagehelper.getWidth())/2;
-		imagehelper.setTopX(topX);
-		imagehelper.setTopY(topY);
+		
+		imagehelper.setTopX(startPos.getX());
+		imagehelper.setTopY(startPos.getY());
 		this.level = level;
 		this.moveHelper = moveHelper;
 		
 	}
 	
 	public void advance(int delta) {
-		topX += moveHelper.getShift(delta)*direction.getX();
-		topY += moveHelper.getShift(delta)*direction.getY();
+		imagehelper.setTopX(imagehelper.getTopX()+moveHelper.getShift(delta)*direction.getX());
+		imagehelper.setTopY(imagehelper.getTopY()+moveHelper.getShift(delta)*direction.getY());
+		
 	}
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
+		System.out.println("render bullet");
 		imagehelper.render(g);
 	}
 

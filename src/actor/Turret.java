@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 import actor.movehelpers.BulletMoveHelper;
 import actor.movehelpers.IMoveHelper;
@@ -47,7 +48,12 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed) {
 			System.out.println("pew pew!");
 			deltaSinceLast = 0;
-			engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition(),BulletMoveHelper.getInstance()));
+			Vector2f startPos = new Vector2f(topX+sprite.getWidth()/2,topY+sprite.getHeight()/2);
+			Vector2f targetPos = engine.getPlayer().getPosition();
+			
+			Vector2f dir = targetPos.sub(startPos).normalise();
+			
+			engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,BulletMoveHelper.getInstance()));
 		}
 		
 	}

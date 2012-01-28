@@ -37,6 +37,9 @@ public class GameEngine extends BasicGame{
 		for (Turret turret : entityManager.getTurrets()) {
 			turret.render(g);
 		}
+		for(Bullet bullet : entityManager.getBullets()) {
+			bullet.render(g);
+		}
 	}
 
 	@Override
@@ -62,7 +65,7 @@ public class GameEngine extends BasicGame{
 		}
 		
 		for (Bullet bullet : entityManager.getBullets()) {
-			//
+			bullet.advance(delta);
 		}
 		
 		for (InputFeeder feeder : entityManager.getInputFeeders()) {
