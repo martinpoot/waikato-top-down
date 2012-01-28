@@ -23,7 +23,6 @@ public class LevelEditor extends BasicGame {
 	List<Turret> turrets;
 	Rectangle referenceBox;
 	
-	private String levelDir = "res/levels/";
 	private String fileName = "level";
 	private String extension = ".csv";
 
@@ -91,7 +90,7 @@ public class LevelEditor extends BasicGame {
 		}
 		System.out.print(output);
 		try {
-			FileWriter fstream = new FileWriter(levelDir + fileName + "-" + (int)(System.currentTimeMillis() / 1000) + extension);
+			FileWriter fstream = new FileWriter(Resources.getFile(Resources.levelDirectory) + fileName + "-" + (int)(System.currentTimeMillis() / 1000) + extension);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(output);
 			  //Close the output stream

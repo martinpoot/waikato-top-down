@@ -43,7 +43,7 @@ public class EntityManager {
 	}
 	
 	public void loadSavedTurrets() {
-		File levelDir = new File("res/levels");	// This needs to be moved to Resources
+		File levelDir = Resources.getFile(Resources.levelDirectory);	// This needs to be moved to Resources
 		String[] fileNames = levelDir.list();
 		// Temporary, this will need to be randomized
 		
@@ -53,7 +53,7 @@ public class EntityManager {
 			String fileName = fileNames[nextLevel];
 			
 			try {
-				FileReader istream = new FileReader("res/levels/" + fileName);
+				FileReader istream = new FileReader(Resources.levelDirectory + fileName);
 				BufferedReader in = new BufferedReader(istream);
 				String line = in.readLine();
 				while (line != null) {
