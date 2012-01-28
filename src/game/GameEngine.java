@@ -50,7 +50,7 @@ public class GameEngine extends BasicGame{
 		
 		entityManager = new EntityManager(this, container, level);
 		
-		entityManager.generateRandomTurrets();
+		entityManager.generateRandomTurrets(50);
 		
 	}
 
@@ -59,6 +59,8 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		level.updatePos(delta);
 		playerInput.poll(delta);
+		
+		entityManager.destroyOffscreen();
 
 		for (Turret turret : entityManager.getTurrets()) {
 			turret.shoot(delta);

@@ -25,6 +25,8 @@ public class Level implements IDrawable {
 	private float end;
 	private IMoveHelper myMoveHelper;
 	
+	public long randomSeed;
+	
 	public Level(GameEngine engine, GameContainer container,String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
 		this.engine = engine;
 		this.container = container;
@@ -34,6 +36,7 @@ public class Level implements IDrawable {
 		start = background.getHeight()-height;
 		end = background.getHeight();
 		this.myMoveHelper = myMoveHelper;
+		randomSeed = System.currentTimeMillis();
 	}
 	
 	public void init(String background) {
