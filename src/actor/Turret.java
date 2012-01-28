@@ -1,5 +1,6 @@
 package actor;
 
+import game.Damages;
 import game.GameEngine;
 import game.Level;
 import game.Resources;
@@ -56,7 +57,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 			
 			Vector2f dir = targetPos.sub(startPos).normalise();
 			
-			engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,BulletMoveHelper.getInstance(), false, 5.0f));
+			engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,BulletMoveHelper.getInstance(), false, Damages.turretDamage));
 		}
 		
 	}
