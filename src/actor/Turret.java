@@ -9,6 +9,7 @@ import game.Speeds;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 import actor.movehelpers.BulletMoveHelper;
@@ -35,7 +36,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		this.container = container;
 		this.myMoveHelper = moveHelper;
 		
-		health = 500;
+		health = Damages.turretHealth;
 	}
 
 	@Override
@@ -116,11 +117,16 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	@Override
 	public void takeDamage(float damageRating) {
 		health -= damageRating;
+		System.out.println("turret is hit! health is " + health);
 	}
 
 	@Override
 	public int getHealth() {
 		return health;
+	}
+
+	public Rectangle getBoundingBox() {
+		return imagehelper.getBoundingBox();
 	}
 
 }

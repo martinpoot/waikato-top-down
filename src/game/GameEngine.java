@@ -25,6 +25,8 @@ public class GameEngine extends BasicGame{
 	InputFeeder playerInput;
 	
 	EntityManager entityManager;
+	private boolean godMode;
+	private boolean gameOver;
 	private boolean levelFinished;
 	private boolean towersGone;
 	
@@ -35,13 +37,15 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		level.render(g);
-		player.render(g);
-		for (Turret turret : entityManager.getTurrets()) {
-			turret.render(g);
-		}
-		for(Bullet bullet : entityManager.getBullets()) {
-			bullet.render(g);
+		if (!gameOver) {
+			level.render(g);
+			player.render(g);
+			for (Turret turret : entityManager.getTurrets()) {
+				turret.render(g);
+			}
+			for(Bullet bullet : entityManager.getBullets()) {
+				bullet.render(g);
+			}
 		}
 	}
 
@@ -60,6 +64,9 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
+		if (gameOver) {
+			return;
+		}
 		level.updatePos(delta);
 		playerInput.poll(delta);
 		
@@ -93,18 +100,43 @@ public class GameEngine extends BasicGame{
 	}
 
 	private void detectCollisions(Bullet bullet) {
+		Rectangle bulletBB = bullet.getBoundingBox();
 		if (bullet.isPlayerFired()) {
-//			for (Turret turret : entityManager.getTurrets()) {
-//				
-//			}
+			List<Turret> turrets = new ArrayList<Turret>();
+			turrets.addAll(entityManager.getTurrets());
+			for (Turret turret : turrets) {
+				// TODO do this for ghosts and enemy ships etc too
+				Rectangle turretBB = turret.getBoundingBox();
+				if (turretBB.intersects(bulletBB)) {
+					turret.takeDamage(bullet.getDamageRating());
+					if (turret.getHealth() <= 0) {
+						entityManager.destroyTurret(turret);
+					}
+					entityManager.destroyBullet(bullet);
+				}
+			}
 		} else {
 			// we know it's a bullet that can potentially hurt the player
 			Rectangle playerBB = player.getBoundingBox();
-			if (playerBB.intersects(bullet.getBoundingBox())) {
-				player.takeDamage(bullet.getDamageRating());
+			if (playerBB.intersects(bulletBB)) {
+				if (!isGodMode()) {
+					player.takeDamage(bullet.getDamageRating());
+					if (player.getHealth() <= 0) {
+						System.out.println("player dies");
+						gameOver = true;
+					}
+				}
 				entityManager.destroyBullet(bullet);
 			}
 		}
+	}
+
+	private boolean isGodMode() {
+		return godMode;
+	}
+
+	public void setGodMode(boolean godMode) {
+		this.godMode = godMode;
 	}
 
 	public static void main(String[] args) throws SlickException {
