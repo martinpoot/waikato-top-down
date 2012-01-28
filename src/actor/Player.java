@@ -115,4 +115,6 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		return health;
 	}
 
+	
+	
 }

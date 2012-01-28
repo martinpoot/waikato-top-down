@@ -63,6 +63,10 @@ public class ImageHelper {
 		sprite.setAlpha(alpha);
 		
 	}
+	
+	public float getAlpha(float alpha) {
+		return sprite.getAlpha();
+	}
 
 	public Vector2f getPosition(Player player) {
 		return new Vector2f(player.getBoundingBox().getCenter());
@@ -77,6 +81,5 @@ public class ImageHelper {
 		
 	}
 
-	
 
 }
