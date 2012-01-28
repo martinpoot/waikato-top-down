@@ -14,6 +14,7 @@ import actor.Bullet;
 import actor.InputFeeder;
 import actor.KeyboardInput;
 import actor.Player;
+import actor.PlayerGhost;
 import actor.Turret;
 import actor.movehelpers.ScrollingMovehelper;
 
@@ -24,6 +25,8 @@ public class GameEngine extends BasicGame{
 	InputFeeder playerInput;
 	
 	EntityManager entityManager;
+	private boolean levelFinished;
+	private boolean towersGone;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -77,8 +80,17 @@ public class GameEngine extends BasicGame{
 			feeder.poll(delta);
 		}
 		
+		
+		if(towersGone && levelFinished) {
+			restartLevel(container);
+		}
 	}
 
+
+	private void restartLevel(GameContainer container) throws SlickException {
+		init(container);
+		
+	}
 
 	private void detectCollisions(Bullet bullet) {
 		if (bullet.isPlayerFired()) {
@@ -108,5 +120,13 @@ public class GameEngine extends BasicGame{
 
 	public void registerBullet(Bullet bullet) {
 		entityManager.addBullet(bullet);
+	}
+
+	public void levelStopped() {
+		levelFinished = true;
+	}
+	
+	public void towersGone(boolean status) {
+		towersGone = status;
 	}
 }
