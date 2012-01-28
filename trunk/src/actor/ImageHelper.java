@@ -1,5 +1,9 @@
 package actor;
 
+import game.Resources;
+
+import java.awt.image.RescaleOp;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -23,7 +27,7 @@ public class ImageHelper {
 
 	public ImageHelper(String graphicsLocation) throws SlickException {
 		// TODO Auto-generated constructor stub
-		sprite = new Image(graphicsLocation);
+		sprite = Resources.getSprite(graphicsLocation);
 		boundingBox = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
 	}
 

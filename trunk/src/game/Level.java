@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.image.RescaleOp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class Level implements IDrawable {
 		this.container = container;
 		width = container.getWidth();
 		height = container.getHeight() - bottomMargin;
-		background = new Image(backgroundPath);
+		background = Resources.getSprite(backgroundPath);
 		start = background.getHeight()-height;
 		end = background.getHeight();
 		this.myMoveHelper = myMoveHelper;
