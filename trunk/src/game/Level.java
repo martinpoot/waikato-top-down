@@ -28,6 +28,8 @@ public class Level implements IDrawable {
 	
 	public long randomSeed;
 	
+	private int leveltransitionheight = 300;
+	
 	public Level(GameEngine engine, GameContainer container, int bottomMargin, String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
 		this.engine = engine;
 		this.container = container;
@@ -74,6 +76,10 @@ public class Level implements IDrawable {
 	
 	public int getLevelHeight() {
 		return background.getHeight();
+	}
+	
+	public int getEnemySpawnHeight() {
+		return getLevelHeight() - height*2-leveltransitionheight;
 	}
 
 }
