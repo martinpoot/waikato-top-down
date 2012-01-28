@@ -50,6 +50,12 @@ public class GameEngine extends BasicGame{
 		super(title);
 		state = GameState.TITLE;
 		score = 0;
+		try {
+			music = new Music("res/music/music.ogg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		music.loop();
 	}
 	
 	
@@ -70,6 +76,8 @@ public class GameEngine extends BasicGame{
 		playbackInputs = new ArrayList<List<boolean[]>>();
 		score = 0;
 		round = 0;
+		music = new Music("res/music/music.ogg");
+		music.loop();
 		init(container);
 	}
 
@@ -141,8 +149,7 @@ public class GameEngine extends BasicGame{
 		
 		entityManager.generateRandomTurrets(Damages.initialTurretCount + round * Damages.turretIncreaseRate);
 		
-		music = new Music("res/music/music.ogg");
-		music.loop();
+		
 	}
 
 	@Override
@@ -206,6 +213,7 @@ public class GameEngine extends BasicGame{
 		
 		
 		if(towersGone && levelFinished) {
+			
 			restartLevel(container);
 		}
 		
@@ -222,6 +230,8 @@ public class GameEngine extends BasicGame{
 		while (playbackInputs.size() > 10) {
 			playbackInputs.remove(0);
 		}
+		levelFinished = false;
+		towersGone = false;
 		round++;
 		init(container);
 		
