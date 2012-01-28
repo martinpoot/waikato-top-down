@@ -7,6 +7,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -30,6 +31,7 @@ public class GameEngine extends BasicGame{
 	private boolean gameOver;
 	private boolean levelFinished;
 	private boolean towersGone;
+	private Music music;
 	
 	private List<List<boolean[]>> playbackInputs = new ArrayList<List<boolean[]>>();
 	private ArrayList<PlayerGhost> ghosts;
@@ -37,6 +39,14 @@ public class GameEngine extends BasicGame{
 	
 	public GameEngine(String title) {
 		super(title);
+	}
+
+	@Override
+	public boolean closeRequested() {
+		if (music != null && music.playing()) {
+			music.stop();
+		}
+		return true;
 	}
 
 	@Override
@@ -76,6 +86,8 @@ public class GameEngine extends BasicGame{
 		
 		entityManager.generateRandomTurrets(50);
 		
+		music = new Music("res/music/music.ogg");
+		music.loop();
 	}
 
 	@Override
