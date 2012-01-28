@@ -126,7 +126,7 @@ public class GameEngine extends BasicGame{
 		splashScreen = new SplashScreen(this, container, Resources.splashImage);
 		gameOverScreen = new GameOverScreen(this, container, Resources.gameOverImage);
 		
-		statusBar = new StatusBar(this, container, Resources.statusBackground, Resources.statusSlider);
+		statusBar = new StatusBar(this, container, Resources.statusBackground);
 		int statusHeight = statusBar.getHeight();
 		
 		int reservedBottomSpace = 0;
@@ -139,7 +139,7 @@ public class GameEngine extends BasicGame{
 		ghostInputs = new ArrayList<PlaybackInput>();
 		float strength = 0.9f;
 		for(int i = playbackInputs.size() - 1; i >= 0; i--) {
-			PlayerGhost ghost = new PlayerGhost(this,container, statusHeight, Resources.player,level, strength);
+			PlayerGhost ghost = new PlayerGhost(this,container, statusHeight, Resources.ghost,level, strength);
 			ghosts.add(ghost);
 			ghostInputs.add(new PlaybackInput(ghost,playbackInputs.get(i)));
 			strength -= 0.1f;	// TODO maybe should set this in damages etc

@@ -12,27 +12,22 @@ public class StatusBar implements IDrawable {
 
 	private GameEngine engine;
 	private ImageHelper bgHelper;
-	private ImageHelper sliderHelper;
 	private int y;
 	private GameContainer container;
 
-	public StatusBar(GameEngine gameEngine, GameContainer container, String background, String slider) throws SlickException {
+	public StatusBar(GameEngine gameEngine, GameContainer container, String background) throws SlickException {
 		engine = gameEngine;
-		//bgHelper = new ImageHelper(background);
-		//sliderHelper = new ImageHelper(slider);
+		bgHelper = new ImageHelper(background);
 		y = container.getHeight() - getHeight();
+		bgHelper.setTopY(y);
 		this.container = container;
 	}
 
 	@Override
 	public void render(Graphics g) {		
-		//bgHelper.render(g);
-		//sliderHelper.render(g);
+		bgHelper.render(g);
 		Color originalColor = g.getColor();
 		g.setColor(Color.black);
-		g.fillRect(0, container.getHeight() - getHeight(), container.getWidth(), getHeight());
-		
-		g.setColor(Color.white);
 		
 		String score = "Score: " + engine.getScore();
 		g.drawString(score, 10, y);
@@ -47,8 +42,7 @@ public class StatusBar implements IDrawable {
 	}
 
 	public int getHeight() {
-		//return bgHelper.getHeight();
-		return 20;
+		return bgHelper.getHeight();
 	}
 
 }
