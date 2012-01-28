@@ -1,5 +1,9 @@
 package game;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +40,38 @@ public class EntityManager {
 
 	public void addBullet(Bullet bullet) {
 		bullets.add(bullet);
+	}
+	
+	public void loadSavedTurrets() {
+		File levelDir = new File("res/levels");	// This needs to be moved to Resources
+		String[] fileNames = levelDir.list();
+		// Temporary, this will need to be randomized
+		
+		int numLevelsRequired = level.getEnemySpawnHeight() / level.getMaxYBounds();
+		while (numLevelsRequired-- > 0) {
+			int nextLevel = (int)(Math.random() * 10) % fileNames.length;
+			String fileName = fileNames[nextLevel];
+			
+			try {
+				FileReader istream = new FileReader("res/levels/" + fileName);
+				BufferedReader in = new BufferedReader(istream);
+				String line = in.readLine();
+				while (line != null) {
+					String[] bits = line.split(",");
+					int x = Integer.parseInt(bits[0]);
+					int y = Integer.parseInt(bits[1]) - (level.getMaxYBounds() * (numLevelsRequired + 1));
+					Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
+							ScrollingMovehelper.getInstance());
+					inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
+					turrets.add(newTurret);
+					line = in.readLine();
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void generateRandomTurrets(int numTurrets) throws SlickException {
