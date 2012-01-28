@@ -39,13 +39,13 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		if (!gameOver) {
 			level.render(g);
-			player.render(g);
 			for (Turret turret : entityManager.getTurrets()) {
 				turret.render(g);
 			}
 			for(Bullet bullet : entityManager.getBullets()) {
 				bullet.render(g);
 			}
+			player.render(g);
 		}
 	}
 
