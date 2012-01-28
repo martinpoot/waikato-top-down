@@ -5,6 +5,7 @@ import game.Damages;
 import game.GameEngine;
 import game.Level;
 import game.Resources;
+import game.SoundEffectManager;
 import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
@@ -88,6 +89,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			SoundEffectManager.getInstance().playerShoots();
 			shotLast = 0;
 		}
 	}
