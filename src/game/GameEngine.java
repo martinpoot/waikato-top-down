@@ -32,6 +32,7 @@ public class GameEngine extends BasicGame{
 	private boolean levelFinished;
 	private boolean towersGone;
 	private Music music;
+	private GameState state;
 	
 	private List<List<boolean[]>> playbackInputs = new ArrayList<List<boolean[]>>();
 	private ArrayList<PlayerGhost> ghosts;
@@ -39,6 +40,7 @@ public class GameEngine extends BasicGame{
 	
 	public GameEngine(String title) {
 		super(title);
+		state = GameState.TITLE;
 	}
 
 	@Override
