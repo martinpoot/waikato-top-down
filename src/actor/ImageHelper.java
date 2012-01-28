@@ -68,6 +68,11 @@ public class ImageHelper {
 		sprite = new Image(location);
 	}
 
+	public void rotate(float angle) {
+		sprite.rotate(angle);
+		
+	}
+
 	
 
 }
