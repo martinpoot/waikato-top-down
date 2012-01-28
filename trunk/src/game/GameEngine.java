@@ -13,6 +13,7 @@ import org.newdawn.slick.geom.Rectangle;
 import actor.Bullet;
 import actor.InputFeeder;
 import actor.KeyboardInput;
+import actor.PlaybackInput;
 import actor.Player;
 import actor.PlayerGhost;
 import actor.Turret;
@@ -22,13 +23,17 @@ public class GameEngine extends BasicGame{
 
 	Level level;
 	Player player;
-	InputFeeder playerInput;
+	KeyboardInput playerInput;
 	
 	EntityManager entityManager;
 	private boolean godMode;
 	private boolean gameOver;
 	private boolean levelFinished;
 	private boolean towersGone;
+	
+	private List<List<boolean[]>> playbackInputs = new ArrayList<List<boolean[]>>();
+	private ArrayList<PlayerGhost> ghosts;
+	private ArrayList<PlaybackInput> ghostInputs;
 	
 	public GameEngine(String title) {
 		super(title);
@@ -39,6 +44,11 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		if (!gameOver) {
 			level.render(g);
+			
+			for(PlayerGhost ghost : ghosts) {
+				ghost.render(g);
+			}
+			
 			for (Turret turret : entityManager.getTurrets()) {
 				turret.render(g);
 			}
@@ -53,6 +63,13 @@ public class GameEngine extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		level = new Level(this,container, Resources.background,ScrollingMovehelper.getInstance());
 		player = new Player(this, container, Resources.player, level);
+		ghosts = new ArrayList<PlayerGhost>();
+		ghostInputs = new ArrayList<PlaybackInput>();
+		for(List<boolean[]> inputRecording : playbackInputs) {
+			PlayerGhost ghost = new PlayerGhost(this,container,Resources.player,level);
+			ghosts.add(ghost);
+			ghostInputs.add(new PlaybackInput(ghost,inputRecording));
+		}
 		playerInput = new KeyboardInput(player, container);
 		
 		entityManager = new EntityManager(this, container, level);
@@ -69,6 +86,10 @@ public class GameEngine extends BasicGame{
 		}
 		level.updatePos(delta);
 		playerInput.poll(delta);
+		
+		for(PlaybackInput pbInput: ghostInputs) {
+			pbInput.poll(delta);
+		}
 		
 		entityManager.destroyOffscreen();
 
@@ -95,6 +116,8 @@ public class GameEngine extends BasicGame{
 
 
 	private void restartLevel(GameContainer container) throws SlickException {
+		playbackInputs.add(playerInput.getInputsTriggered());
+		
 		init(container);
 		
 	}
