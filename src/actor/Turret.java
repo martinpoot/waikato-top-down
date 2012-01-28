@@ -45,8 +45,8 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	public void shoot(int delta) throws SlickException {
 		changeDirection();
 		deltaSinceLast += delta;
-		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed) {
-			System.out.println("pew pew!");
+		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed && topY >= 0 && topY <= level.getMaxYBounds()-sprite.getWidth()) {
+			
 			deltaSinceLast = 0;
 			Vector2f startPos = new Vector2f(topX+sprite.getWidth()/2,topY+sprite.getHeight()/2);
 			Vector2f targetPos = engine.getPlayer().getPosition();

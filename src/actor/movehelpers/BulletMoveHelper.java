@@ -18,7 +18,7 @@ public class BulletMoveHelper implements IMoveHelper {
 
 	@Override
 	public float getShift(int delta) {
-		return delta/1000*Speeds.bulletSpeed;
+		return Speeds.bulletSpeed*delta/1000;
 	}
 	
 }

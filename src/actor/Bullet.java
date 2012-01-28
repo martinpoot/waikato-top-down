@@ -38,7 +38,7 @@ public class Bullet implements IDrawable {
 
 	@Override
 	public void render(Graphics g) {
-		System.out.println("render bullet");
+		
 		imagehelper.render(g);
 	}
 	
