@@ -3,6 +3,7 @@ package actor;
 
 import game.GameEngine;
 import game.Level;
+import game.Resources;
 import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
@@ -11,10 +12,17 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Player implements IDrawable,IMoveable {
+import actor.movehelpers.BulletMoveHelper;
+import actor.movehelpers.PlayerBulletMoveHelper;
+
+public class Player implements IDrawable,IMoveable, IShooter {
 	
 	private Level level;
+	GameEngine engine;
+	GameContainer container;
+	private int deltaSum;
 	private ImageHelper imagehelper;
+
 	
 	public Player(GameEngine engine, GameContainer container, String graphicsLocation,Level level) throws SlickException {
 		imagehelper = new ImageHelper(graphicsLocation);
@@ -22,6 +30,9 @@ public class Player implements IDrawable,IMoveable {
 		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
 		
 		this.level = level;
+		this.engine = engine;
+		this.container = container;
+		deltaSum = 0;
 	}
 
 	@Override
@@ -59,6 +70,24 @@ public class Player implements IDrawable,IMoveable {
 	public Vector2f getPosition() {
 		return new Vector2f(getBoundingBox().getCenter());
 	}
+
+
+	@Override
+	public void shoot(int delta) {
+		deltaSum += delta;
+		if (deltaSum >= 1000 / Speeds.playerFireSpeed){
+			Vector2f dir = new Vector2f(0, -1);
+			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 1);
+			try {
+				engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), false, 5.0f));
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			deltaSum = 0;
+		}
+	}
+
 
 	public Rectangle getBoundingBox() {
 		return imagehelper.getBoundingBox();
