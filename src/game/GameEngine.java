@@ -138,6 +138,15 @@ public class GameEngine extends BasicGame{
 					entityManager.destroyBullet(bullet);
 				}
 			}
+			// Now check if this is hitting the player (e.g. ghost bullets)
+			if (bullet.getBoundingBox().intersects(player.getBoundingBox())) {
+				player.takeDamage(bullet.getDamageRating());
+				entityManager.destroyBullet(bullet);
+				if (player.getHealth() <= 0) {
+					System.out.println("player dies");
+					gameOver = true;
+				}
+			}
 		} else {
 			// we know it's a bullet that can potentially hurt the player
 			Rectangle playerBB = player.getBoundingBox();

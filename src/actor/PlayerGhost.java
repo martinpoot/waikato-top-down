@@ -33,7 +33,7 @@ public class PlayerGhost extends Player {
 			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 1);
 			try {
 				engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
-						false, Damages.ghostDamage));
+						true, Damages.ghostDamage));
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
