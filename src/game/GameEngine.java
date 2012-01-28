@@ -2,7 +2,6 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -49,7 +48,6 @@ public class GameEngine extends BasicGame{
 		super(title);
 		state = GameState.TITLE;
 		score = 0;
-		setGodMode(true);
 	}
 	
 	
@@ -130,7 +128,7 @@ public class GameEngine extends BasicGame{
 			PlayerGhost ghost = new PlayerGhost(this,container, statusHeight, Resources.player,level, strength);
 			ghosts.add(ghost);
 			ghostInputs.add(new PlaybackInput(ghost,playbackInputs.get(i)));
-			strength -= 0.1f;	// maybe should set this in damages etc
+			strength -= 0.1f;	// TODO maybe should set this in damages etc
 		}
 		playerInput = new KeyboardInput(player, container);
 		
