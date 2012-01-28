@@ -7,6 +7,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
@@ -43,7 +44,30 @@ public class GameEngine extends BasicGame{
 	public GameEngine(String title) {
 		super(title);
 		state = GameState.TITLE;
+		score = 0;
 	}
+	
+	
+	public void stateTransition(GameContainer container) throws SlickException {
+		switch(state) {
+		case GAME_OVER:
+		case TITLE:
+			restartGame(container);
+			state = GameState.PLAYING;
+			break;
+		case PLAYING:
+			state = GameState.GAME_OVER;
+			break;
+		}
+	}
+
+	private void restartGame(GameContainer container) throws SlickException {
+		playbackInputs = new ArrayList<List<boolean[]>>();
+		score = 0;
+		init(container);
+		
+	}
+
 
 	@Override
 	public boolean closeRequested() {
@@ -56,7 +80,12 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
-		if (!gameOver) {
+		if(state == GameState.TITLE) {
+			g.drawString("The Game",50,50);
+			g.drawString("Press Space to Play",50,100);
+			
+		}
+		else if (state == GameState.PLAYING) {
 			level.render(g);
 			
 			for(PlayerGhost ghost : ghosts) {
@@ -70,6 +99,9 @@ public class GameEngine extends BasicGame{
 				bullet.render(g);
 			}
 			player.render(g);
+		}
+		else if(state == GameState.GAME_OVER) {
+			g.drawString("Game over man, game over", 50, 50);
 		}
 	}
 
@@ -97,9 +129,26 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		if (gameOver) {
-			return;
+		
+		switch(state) {
+		case TITLE:
+		case GAME_OVER:
+			if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {
+				stateTransition(container);
+			}
+			break;
+		case PLAYING:
+			updateGamePlan(container, delta);
+			break;
+			
 		}
+		
+		
+	}
+
+
+	private void updateGamePlan(GameContainer container, int delta)
+			throws SlickException {
 		level.updatePos(delta);
 		playerInput.poll(delta);
 		
@@ -127,6 +176,11 @@ public class GameEngine extends BasicGame{
 		
 		if(towersGone && levelFinished) {
 			restartLevel(container);
+		}
+		
+		if(gameOver) {
+			gameOver = false;
+			stateTransition(container);
 		}
 	}
 
@@ -190,7 +244,7 @@ public class GameEngine extends BasicGame{
 
 	public static void main(String[] args) throws SlickException {
 		         AppGameContainer app = 
-					new AppGameContainer(new GameEngine("Memories that haunt us"),800,600,false);
+					new AppGameContainer(new GameEngine("Memories that haunt you"),800,600,false);
 		         app.setVSync(true);
 		         app.start();
 	}
