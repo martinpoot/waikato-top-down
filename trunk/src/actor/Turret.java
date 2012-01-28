@@ -8,7 +8,6 @@ import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -17,21 +16,20 @@ import actor.movehelpers.IMoveHelper;
 
 public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	
-	Image sprite;
-	float topX;
-	float topY;
 	private GameEngine engine;
 	private GameContainer container;
 	private Level level;
 	
 	int deltaSinceLast;
 	private IMoveHelper myMoveHelper;
-	private int health;	
+	private int health;
+	private ImageHelper imagehelper;	
 	
 	public Turret(GameEngine engine, GameContainer container, String graphicsLocation, Level level, float x, float y, IMoveHelper moveHelper) throws SlickException {
-		sprite = new Image(graphicsLocation);
-		topY = y;
-		topX = x;
+		imagehelper = new ImageHelper(graphicsLocation);
+		imagehelper.setTopX(x);
+		imagehelper.setTopY(y);
+		
 		this.level = level;
 		this.engine = engine;
 		this.container = container;
@@ -42,17 +40,17 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	@Override
 	public void render(Graphics g) {
-		sprite.draw(topX, topY);
+		imagehelper.render(g);
 	}
 
 	@Override
 	public void shoot(int delta) throws SlickException {
 		changeDirection();
 		deltaSinceLast += delta;
-		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed && topY >= 0 && topY <= level.getMaxYBounds()-sprite.getWidth()) {
+		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed && getY() >= 0 && getY() <= level.getMaxYBounds()-imagehelper.getWidth()) {
 			
 			deltaSinceLast = 0;
-			Vector2f startPos = new Vector2f(topX+sprite.getWidth()/2,topY+sprite.getHeight()/2);
+			Vector2f startPos = new Vector2f(imagehelper.getBoundingBox().getCenter());
 			Vector2f targetPos = engine.getPlayer().getPosition();
 			
 			Vector2f dir = targetPos.sub(startPos).normalise();
@@ -64,24 +62,22 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	private void changeDirection() throws SlickException {
 		Vector2f playerBB = engine.getPlayer().getPosition();
-		float xdiff = playerBB.getX() - (topX + sprite.getWidth());
-		float ydiff = playerBB.getY() - (topY + sprite.getHeight());
+		float xdiff = playerBB.getX() - (getX() + imagehelper.getWidth());
+		float ydiff = playerBB.getY() - (getY() + imagehelper.getHeight());
 		if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
 			if (xdiff < 0) {
-				sprite = new Image(Resources.turretShootingLeft);
+				imagehelper.setGraphicsLocation(Resources.turretShootingLeft);
 			}
 			else {
-
-				sprite = new Image(Resources.turretShootingRight);
+				imagehelper.setGraphicsLocation(Resources.turretShootingRight);
 			}
 		}
 		else {	// closest on x 
 			if (ydiff < 0) {
-				sprite = new Image(Resources.turretShootingUp);
+				imagehelper.setGraphicsLocation(Resources.turretShootingUp);
 			}
 			else {
-
-				sprite = new Image(Resources.turretShootingDown);
+				imagehelper.setGraphicsLocation(Resources.turretShootingDown);
 			}
 		}
 	}
@@ -100,7 +96,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	@Override
 	public void moveDown(int delta) {
-		topY += myMoveHelper.getShift(delta);
+		imagehelper.setTopY(imagehelper.getTopY() + myMoveHelper.getShift(delta));
 	}
 
 	@Override
@@ -110,11 +106,11 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	}
 
 	public float getX() {
-		return topX;
+		return imagehelper.getTopX();
 	}
 	
 	public float getY() {
-		return topY;
+		return imagehelper.getTopY();
 	}
 
 	@Override

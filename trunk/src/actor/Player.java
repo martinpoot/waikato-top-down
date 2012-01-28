@@ -71,7 +71,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	}
 
 	public Vector2f getPosition() {
-		return new Vector2f(getBoundingBox().getCenter());
+		return imagehelper.getPosition(this);
 	}
 
 
