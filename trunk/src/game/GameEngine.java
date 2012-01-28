@@ -21,15 +21,12 @@ public class GameEngine extends BasicGame{
 
 	Level level;
 	Player player;
-	InputFeeder input;
-	List<InputFeeder> inputFeeders;
-	List<Turret> turrets;
-	List<Bullet> bullets;
+	InputFeeder playerInput;
+	
+	EntityManager entityManager;
 	
 	public GameEngine(String title) {
 		super(title);
-		
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -37,53 +34,40 @@ public class GameEngine extends BasicGame{
 			throws SlickException {
 		level.render(g);
 		player.render(g);
-		for (Turret turret : turrets) {
+		for (Turret turret : entityManager.getTurrets()) {
 			turret.render(g);
 		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		ScrollingMovehelper scroller = new ScrollingMovehelper();
-		level = new Level(this,container, Resources.background,scroller);
+		level = new Level(this,container, Resources.background,ScrollingMovehelper.getInstance());
 		player = new Player(this, container, Resources.player, level);
-		input = new KeyboardInput(player, container);
+		playerInput = new KeyboardInput(player, container);
 		
-		turrets = new ArrayList<Turret>();
-
-		for (int i = 0; i < 5; i++) {
-			turrets.add(new Turret(this, container, Resources.turretShootingDown, level, 
-					(float)(Math.random() * level.getMaxXBounds()), (float)(Math.random() * level.getMaxYBounds()), scroller));
-		}
+		entityManager = new EntityManager(this, container, level);
 		
-		bullets = new ArrayList<Bullet>();
+		entityManager.generateRandomTurrets();
 		
-		inputFeeders = new ArrayList<InputFeeder>();
-		
-		for (Turret turret: turrets) {
-			inputFeeders.add(new ScrollingInputFeeder(turret, container));
-		}
 	}
 
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		level.updatePos(delta);
-		input.poll(delta);
-		
+		playerInput.poll(delta);
 
-		for (Turret turret : turrets) {
+		for (Turret turret : entityManager.getTurrets()) {
 			turret.shoot(delta);
 		}
 		
-		for (Bullet bullet : bullets) {
+		for (Bullet bullet : entityManager.getBullets()) {
 			//
 		}
 		
-		for (InputFeeder feeder : inputFeeders) {
+		for (InputFeeder feeder : entityManager.getInputFeeders()) {
 			feeder.poll(delta);
 		}
-		
 		
 	}
 
@@ -100,6 +84,6 @@ public class GameEngine extends BasicGame{
 	}
 
 	public void registerBullet(Bullet bullet) {
-		bullets.add(bullet);
+		entityManager.addBullet(bullet);
 	}
 }
