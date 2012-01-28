@@ -9,6 +9,8 @@ public class SoundEffectManager {
 	Sound turretExplosion;
 	Sound playerExplosion;
 	Sound playerShoots;
+	private Sound playerCollision;
+	
 	
 	private static SoundEffectManager instance;
 	
@@ -28,10 +30,11 @@ public class SoundEffectManager {
 	}
 	
 	private void init() throws SlickException {
-		turretHit = new Sound(Resources.soundTurretHit);
-		turretExplosion = new Sound(Resources.soundTurretExplosion);
-		playerExplosion = new Sound(Resources.soundPlayerExplosion);
-		playerShoots = new Sound(Resources.soundPlayerShoot);
+		turretHit = Resources.getSound(Resources.soundTurretHit);
+		turretExplosion = Resources.getSound(Resources.soundTurretExplosion);
+		playerExplosion = Resources.getSound(Resources.soundPlayerExplosion);
+		playerShoots = Resources.getSound(Resources.soundPlayerShoot);
+		playerCollision = Resources.getSound(Resources.playerCollision);
 	}
 	
 	public void turretHit() {
@@ -54,7 +57,7 @@ public class SoundEffectManager {
 	}
 
 	public void playerCollision() {
-		// TODO Auto-generated method stub
+		playerCollision.play();
 		
 	}
 
