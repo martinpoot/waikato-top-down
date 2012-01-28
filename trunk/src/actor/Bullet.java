@@ -5,6 +5,7 @@ import game.Level;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 import actor.movehelpers.IMoveHelper;
@@ -52,6 +53,14 @@ public class Bullet implements IDrawable {
 	
 	public float getY() {
 		return imagehelper.getTopY() + (imagehelper.getHeight() / 2);
+	}
+
+	public boolean isPlayerFired() {
+		return firedByPlayer;
+	}
+
+	public Rectangle getBoundingBox() {
+		return imagehelper.getBoundingBox();
 	}
 
 }

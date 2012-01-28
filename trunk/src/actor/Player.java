@@ -7,40 +7,39 @@ import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Player implements IDrawable,IMoveable {
 	
-	Image sprite;
-	float topX;
-	float topY;
 	private Level level;
+	private ImageHelper imagehelper;
 	
 	public Player(GameEngine engine, GameContainer container, String graphicsLocation,Level level) throws SlickException {
-		sprite = new Image(graphicsLocation);
+		imagehelper = new ImageHelper(graphicsLocation);
+		imagehelper.setTopY((float) (level.getMaxYBounds()-imagehelper.getHeight()));
+		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
+		
 		this.level = level;
-		topY = level.getMaxYBounds()-sprite.getHeight();
-		topX = (level.getMaxXBounds()-sprite.getWidth())/2;
 	}
 
 	@Override
 	public void render(Graphics g) {
-		sprite.draw(topX,topY);
+		imagehelper.render(g);
 	}
 
 	@Override
 	public void moveLeft(int delta) {
 		float shift = Speeds.playerspeed*delta/1000;
-		topX = Math.max(level.getMinXBounds(), topX-shift);
+		imagehelper.setTopX(Math.max(level.getMinXBounds(), imagehelper.getTopX()-shift));
 		
 	}
 
 	@Override
 	public void moveRight(int delta) {
 		float shift = Speeds.playerspeed*delta/1000;
-		topX = Math.min(level.getMaxXBounds()-sprite.getWidth(), topX+shift);
+		imagehelper.setTopX(Math.min(level.getMaxXBounds()-imagehelper.getWidth(), imagehelper.getTopX()+shift));
 
 		
 	}
@@ -48,19 +47,21 @@ public class Player implements IDrawable,IMoveable {
 	@Override
 	public void moveDown(int delta) {
 		float shift = Speeds.playerspeed*delta/1000;
-		topY = Math.min(level.getMaxYBounds()-sprite.getHeight(), topY+shift);
-		
+		imagehelper.setTopY(Math.min(level.getMaxYBounds()-imagehelper.getHeight(), imagehelper.getTopY()+shift));
 	}
 
 	@Override
 	public void moveUp(int delta) {
 		float shift = Speeds.playerspeed*delta/1000;
-		topY = Math.max(level.getMinYBounds(),topY-shift);
-		
+		imagehelper.setTopY(Math.max(level.getMinYBounds(),imagehelper.getTopY()-shift));
 	}
 
 	public Vector2f getPosition() {
-		return new Vector2f(topX+sprite.getWidth()/2, topY+sprite.getHeight()/2);
+		return new Vector2f(getBoundingBox().getCenter());
+	}
+
+	public Rectangle getBoundingBox() {
+		return imagehelper.getBoundingBox();
 	}
 
 }

@@ -3,6 +3,7 @@ package actor;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class ImageHelper {
 
@@ -17,10 +18,12 @@ public class ImageHelper {
 
 	private float topX;
 	private float topY;
+	private Rectangle boundingBox;
 
 	public ImageHelper(String graphicsLocation) throws SlickException {
 		// TODO Auto-generated constructor stub
 		sprite = new Image(graphicsLocation);
+		boundingBox = new Rectangle(0, 0, sprite.getWidth(), sprite.getHeight());
 	}
 
 	public void render(Graphics g) {
@@ -34,6 +37,7 @@ public class ImageHelper {
 
 	public void setTopX(float topX) {
 		this.topX = topX;
+		boundingBox.setX(topX);
 	}
 
 	public float getTopY() {
@@ -42,6 +46,11 @@ public class ImageHelper {
 
 	public void setTopY(float topY) {
 		this.topY = topY;
+		boundingBox.setY(topY);
+	}
+
+	public Rectangle getBoundingBox() {
+		return boundingBox;
 	}
 	
 	

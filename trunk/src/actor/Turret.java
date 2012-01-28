@@ -59,8 +59,9 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	}
 
 	private void changeDirection() throws SlickException {
-		float xdiff = (engine.getPlayer().topX + (engine.getPlayer().sprite.getWidth() / 2)) - (topX + sprite.getWidth());
-		float ydiff = (engine.getPlayer().topY + (engine.getPlayer().sprite.getHeight() / 2)) - (topY + sprite.getHeight());
+		Vector2f playerBB = engine.getPlayer().getPosition();
+		float xdiff = playerBB.getX() - (topX + sprite.getWidth());
+		float ydiff = playerBB.getY() - (topY + sprite.getHeight());
 		if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
 			if (xdiff < 0) {
 				sprite = new Image(Resources.turretShootingLeft);
