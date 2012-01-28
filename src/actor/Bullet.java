@@ -63,4 +63,8 @@ public class Bullet implements IDrawable {
 		return imagehelper.getBoundingBox();
 	}
 
+	public float getDamageRating() {
+		return damageRating;
+	}
+
 }

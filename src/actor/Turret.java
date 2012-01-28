@@ -24,7 +24,8 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	private Level level;
 	
 	int deltaSinceLast;
-	private IMoveHelper myMoveHelper;	
+	private IMoveHelper myMoveHelper;
+	private int health;	
 	
 	public Turret(GameEngine engine, GameContainer container, String graphicsLocation, Level level, float x, float y, IMoveHelper moveHelper) throws SlickException {
 		sprite = new Image(graphicsLocation);
@@ -34,6 +35,8 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		this.engine = engine;
 		this.container = container;
 		this.myMoveHelper = moveHelper;
+		
+		health = 500;
 	}
 
 	@Override
@@ -111,6 +114,16 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	
 	public float getY() {
 		return topY;
+	}
+
+	@Override
+	public void takeDamage(float damageRating) {
+		health -= damageRating;
+	}
+
+	@Override
+	public int getHealth() {
+		return health;
 	}
 
 }
