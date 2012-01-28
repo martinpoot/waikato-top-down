@@ -9,11 +9,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 
 import actor.movehelpers.BulletMoveHelper;
 import actor.movehelpers.IMoveHelper;
-import actor.movehelpers.ScrollingMovehelper;
 
 public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	
@@ -44,6 +42,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	@Override
 	public void shoot(int delta) throws SlickException {
+		changeDirection();
 		deltaSinceLast += delta;
 		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed) {
 			System.out.println("pew pew!");
@@ -51,6 +50,29 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 			engine.registerBullet(new Bullet(container, Resources.bullet1, level, engine.getPlayer().getPosition(),BulletMoveHelper.getInstance()));
 		}
 		
+	}
+
+	private void changeDirection() throws SlickException {
+		float xdiff = (engine.getPlayer().topX + (engine.getPlayer().sprite.getWidth() / 2)) - (topX + sprite.getWidth());
+		float ydiff = (engine.getPlayer().topY + (engine.getPlayer().sprite.getHeight() / 2)) - (topY + sprite.getHeight());
+		if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
+			if (xdiff < 0) {
+				sprite = new Image(Resources.turretShootingLeft);
+			}
+			else {
+
+				sprite = new Image(Resources.turretShootingRight);
+			}
+		}
+		else {	// closest on x 
+			if (ydiff < 0) {
+				sprite = new Image(Resources.turretShootingUp);
+			}
+			else {
+
+				sprite = new Image(Resources.turretShootingDown);
+			}
+		}
 	}
 
 	@Override
