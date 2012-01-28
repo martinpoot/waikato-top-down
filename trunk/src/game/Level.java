@@ -28,7 +28,7 @@ public class Level implements IDrawable {
 	
 	public long randomSeed;
 	
-	private int leveltransitionheight = 300;
+	private int leveltransitionheight = 200;
 	
 	public Level(GameEngine engine, GameContainer container, int bottomMargin, String backgroundPath,IMoveHelper myMoveHelper) throws SlickException {
 		this.engine = engine;
