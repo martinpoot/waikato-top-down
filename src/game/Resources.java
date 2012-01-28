@@ -1,6 +1,5 @@
 package game;
 
-import java.net.URL;
 import java.util.Hashtable;
 
 import org.newdawn.slick.Image;
