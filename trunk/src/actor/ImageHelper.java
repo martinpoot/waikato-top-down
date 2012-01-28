@@ -54,6 +54,12 @@ public class ImageHelper {
 		return boundingBox;
 	}
 
+	public void setAlpha(float alpha) {
+
+		sprite.setAlpha(alpha);
+		
+	}
+
 	public Vector2f getPosition(Player player) {
 		return new Vector2f(player.getBoundingBox().getCenter());
 	}
@@ -61,7 +67,7 @@ public class ImageHelper {
 	public void setGraphicsLocation(String location) throws SlickException {
 		sprite = new Image(location);
 	}
-	
+
 	
 
 }

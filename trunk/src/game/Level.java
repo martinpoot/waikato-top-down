@@ -53,6 +53,9 @@ public class Level implements IDrawable {
 		float shift = myMoveHelper.getShift(delta);
 		start = Math.max(0, start-shift);
 		end = Math.max(height, end-shift);
+		if(start == 0) {
+			engine.levelStopped();
+		}
 	}
 
 	public int getMinXBounds() {

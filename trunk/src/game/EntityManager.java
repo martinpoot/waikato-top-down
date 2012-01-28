@@ -74,6 +74,8 @@ public class EntityManager {
 		}
 		turrets.removeAll(turretsToRemove);
 		
+		engine.towersGone(turrets.size() == 0);
+		
 		List<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		
 		for(Bullet bullet : bullets) {

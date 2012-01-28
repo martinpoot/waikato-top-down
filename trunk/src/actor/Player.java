@@ -18,12 +18,13 @@ import actor.movehelpers.PlayerBulletMoveHelper;
 
 public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	
-	private Level level;
-	GameEngine engine;
-	GameContainer container;
-	private int shotLast;
-	private ImageHelper imagehelper;
+	protected Level level;
+	protected GameEngine engine;
+	protected GameContainer container;
+	protected int shotLast;
+	protected ImageHelper imagehelper;
 	private int health;
+
 
 	
 	public Player(GameEngine engine, GameContainer container, String graphicsLocation,Level level) throws SlickException {
