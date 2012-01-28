@@ -4,6 +4,7 @@ import game.Damages;
 import game.GameEngine;
 import game.Level;
 import game.Resources;
+import game.Scores;
 import game.Speeds;
 
 import org.newdawn.slick.GameContainer;
@@ -132,6 +133,10 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 	public void setX(float x) {
 		// TODO Auto-generated method stub
 		imagehelper.setTopX(x);
+	}
+
+	public int getScoreValue() {
+		return Scores.turret;
 	}
 
 }
