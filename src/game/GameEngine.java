@@ -26,6 +26,8 @@ public class GameEngine extends BasicGame{
 	Player player;
 	KeyboardInput playerInput;
 	
+	private int score = 0;
+	
 	EntityManager entityManager;
 	private boolean godMode;
 	private boolean gameOver;
@@ -147,7 +149,7 @@ public class GameEngine extends BasicGame{
 				if (turretBB.intersects(bulletBB)) {
 					turret.takeDamage(bullet.getDamageRating());
 					if (turret.getHealth() <= 0) {
-						player.addScore(turret.getScoreValue());
+						score +=turret.getScoreValue();
 						entityManager.destroyTurret(turret);
 					}
 					entityManager.destroyBullet(bullet);
