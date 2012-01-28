@@ -1,5 +1,7 @@
 package game;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Hashtable;
 
 import org.newdawn.slick.Image;
@@ -11,6 +13,7 @@ public class Resources {
 
 	private static Hashtable<String,Image> sprites = new Hashtable<String,Image>();
 	private static Hashtable<String,Sound> sounds = new Hashtable<String,Sound>();
+	private static Hashtable<String, File> files = new Hashtable<String, File>();
 	
 	public final static String bullet1 = "res/bullet.png";
 
@@ -39,8 +42,18 @@ public class Resources {
 	
 	public static final String playerCollision = "res/music/recorded/ouch.ogg";
 	
+	// File resources
+	public static final String levelDirectory = "res/levels/";
 	
 	
+	
+	
+	public static File getFile(String fileResource) {
+		if(!files .contains(fileResource)) {
+			files.put(fileResource, new File(fileResource));
+		}
+		return files.get(fileResource);
+	}
 	
 	public static Image getSprite(String spriteResource) throws SlickException {
 		if(!sprites.contains(spriteResource)) {
