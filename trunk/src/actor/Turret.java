@@ -47,7 +47,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 
 	@Override
 	public void shoot(int delta) throws SlickException {
-		changeDirection();
+		rotateTurret();
 		deltaSinceLast += delta;
 		if (deltaSinceLast >= 1000 / Speeds.turretFireSpeed && getY() >= 0 && getY() <= level.getMaxYBounds()-imagehelper.getWidth()) {
 			
@@ -62,11 +62,20 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		
 	}
 
-	private void changeDirection() throws SlickException {
+	private void rotateTurret() throws SlickException {
 		Vector2f playerBB = engine.getPlayer().getPosition();
-		float xdiff = playerBB.getX() - (getX() + imagehelper.getWidth());
-		float ydiff = playerBB.getY() - (getY() + imagehelper.getHeight());
-		if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
+		
+		Vector2f centrePos = new Vector2f(getX(),getY());
+		
+		//float xdiff = playerBB.getX() - (getX() + imagehelper.getWidth());
+		//float ydiff = playerBB.getY() - (getY() + imagehelper.getHeight());
+		
+		float angle = (float) playerBB.sub(centrePos).getTheta();
+		
+		imagehelper.setGraphicsLocation(Resources.turretShootingRight);
+		imagehelper.rotate(angle);
+		
+		/*if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
 			if (xdiff < 0) {
 				imagehelper.setGraphicsLocation(Resources.turretShootingLeft);
 			}
@@ -81,7 +90,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 			else {
 				imagehelper.setGraphicsLocation(Resources.turretShootingDown);
 			}
-		}
+		}*/
 	}
 
 	@Override
