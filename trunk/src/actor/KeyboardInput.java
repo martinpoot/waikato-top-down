@@ -5,27 +5,31 @@ import org.newdawn.slick.GameContainer;
 
 public class KeyboardInput implements InputFeeder {
 	
-	private IMoveable myMovable;
+	private Player player;
+	
 	private GameContainer container;
 
-	public KeyboardInput(IMoveable myMovable,GameContainer container) {
-		this.myMovable = myMovable;
+	public KeyboardInput(Player player,GameContainer container) {
+		this.player = player;
 		this.container = container;
 	}
 	
 	@Override
 	public void poll(int delta) {
 		if(container.getInput().isKeyDown(Keyboard.KEY_LEFT)) {
-			myMovable.moveLeft(delta);
+			player.moveLeft(delta);
 		}
 		if(container.getInput().isKeyDown(Keyboard.KEY_RIGHT)) {
-			myMovable.moveRight(delta);
+			player.moveRight(delta);
 		}
 		if(container.getInput().isKeyDown(Keyboard.KEY_UP)) {
-			myMovable.moveUp(delta);
+			player.moveUp(delta);
 		}
 		if(container.getInput().isKeyDown(Keyboard.KEY_DOWN)) {
-			myMovable.moveDown(delta);
+			player.moveDown(delta);
+		}
+		if(container.getInput().isKeyDown(Keyboard.KEY_SPACE) || container.getInput().isKeyPressed(Keyboard.KEY_SPACE)){
+			player.shoot(delta);
 		}
 	}
 	
