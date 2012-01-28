@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,19 +43,20 @@ public class EntityManager {
 		bullets.add(bullet);
 	}
 	
-	public void createTurret(float x, float y) throws SlickException {
-		Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
-				ScrollingMovehelper.getInstance());
-		turrets.add(newTurret);
-		inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
-	}
-	
 	public void generateRandomTurrets(int numTurrets) throws SlickException {
 		for (int i = 0; i < numTurrets; i++) {
 			float x = (float)(Math.random() * level.getMaxXBounds());
 			float y = -(float)(Math.random() * (level.getLevelHeight() - level.getMaxYBounds()));
 			
-			createTurret(x, y);
+			Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
+					ScrollingMovehelper.getInstance());
+			
+			if (newTurret.getBoundingBox().getMaxX() > level.getMaxXBounds()) {
+				newTurret.setX(newTurret.getX() - newTurret.getBoundingBox().getWidth());
+			}
+			
+			turrets.add(newTurret);
+			inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
 		}
 	}
 

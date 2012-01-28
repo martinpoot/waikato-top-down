@@ -129,4 +129,9 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		return imagehelper.getBoundingBox();
 	}
 
+	public void setX(float x) {
+		// TODO Auto-generated method stub
+		imagehelper.setTopX(x);
+	}
+
 }
