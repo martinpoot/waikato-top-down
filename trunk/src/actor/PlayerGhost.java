@@ -13,11 +13,14 @@ import org.newdawn.slick.geom.Vector2f;
 import actor.movehelpers.PlayerBulletMoveHelper;
 
 public class PlayerGhost extends Player {
+	
+	private float strength;
 
 	public PlayerGhost(GameEngine engine, GameContainer container,
-			int bottomMargin, String graphicsLocation, Level level) throws SlickException {
+			int bottomMargin, String graphicsLocation, Level level, float strength) throws SlickException {
 		super(engine, container, bottomMargin, graphicsLocation, level, 0);
-		this.imagehelper.setAlpha(0.3f);
+		this.strength = strength;
+		this.imagehelper.setAlpha(strength);
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class PlayerGhost extends Player {
 			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 1);
 			try {
 				engine.registerBullet(new Bullet(container, Resources.bullet1, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
-						true, Damages.ghostDamage));
+						true, Damages.ghostDamage * strength));
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
