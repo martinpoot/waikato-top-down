@@ -77,7 +77,7 @@ public class GameEngine extends BasicGame{
 
 	public static void main(String[] args) throws SlickException {
 		         AppGameContainer app = 
-					new AppGameContainer(new GameEngine("Top down ghost zombie shooter"),800,600,false);
+					new AppGameContainer(new GameEngine("Memories that haunt us"),800,600,false);
 		         app.setVSync(true);
 		         app.start();
 	}
