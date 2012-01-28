@@ -28,10 +28,10 @@ public class SoundEffectManager {
 	}
 	
 	private void init() throws SlickException {
-		turretHit = new Sound("res/music/turret-hit.ogg");
-		turretExplosion = new Sound("res/music/explosion-sm.ogg");
-		playerExplosion = new Sound("res/music/player-dies.ogg");
-		playerShoots = new Sound("res/music/player-shoot.ogg");
+		turretHit = new Sound(Resources.soundTurretHit);
+		turretExplosion = new Sound(Resources.soundTurretExplosion);
+		playerExplosion = new Sound(Resources.soundPlayerExplosion);
+		playerShoots = new Sound(Resources.soundPlayerShoot);
 	}
 	
 	public void turretHit() {
