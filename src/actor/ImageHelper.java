@@ -4,6 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Vector2f;
 
 public class ImageHelper {
 
@@ -51,6 +52,14 @@ public class ImageHelper {
 
 	public Rectangle getBoundingBox() {
 		return boundingBox;
+	}
+
+	public Vector2f getPosition(Player player) {
+		return new Vector2f(player.getBoundingBox().getCenter());
+	}
+
+	public void setGraphicsLocation(String location) throws SlickException {
+		sprite = new Image(location);
 	}
 	
 	
