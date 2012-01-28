@@ -1,19 +1,16 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 import actor.Bullet;
 import actor.InputFeeder;
 import actor.KeyboardInput;
 import actor.Player;
-import actor.ScrollingInputFeeder;
 import actor.Turret;
 import actor.movehelpers.ScrollingMovehelper;
 
@@ -68,6 +65,7 @@ public class GameEngine extends BasicGame{
 		
 		for (Bullet bullet : entityManager.getBullets()) {
 			bullet.advance(delta);
+			detectCollisions(bullet);
 		}
 		
 		for (InputFeeder feeder : entityManager.getInputFeeders()) {
@@ -76,6 +74,20 @@ public class GameEngine extends BasicGame{
 		
 	}
 
+
+	private void detectCollisions(Bullet bullet) {
+		if (bullet.isPlayerFired()) {
+//			for (Turret turret : entityManager.getTurrets()) {
+//				
+//			}
+		} else {
+			// we know it's a bullet that can potentially hurt the player
+			Rectangle playerBB = player.getBoundingBox();
+			if (playerBB.intersects(bullet.getBoundingBox())) {
+				System.out.println("boom!");
+			}
+		}
+	}
 
 	public static void main(String[] args) throws SlickException {
 		         AppGameContainer app = 
