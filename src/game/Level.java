@@ -64,5 +64,9 @@ public class Level implements IDrawable {
 	public int getMaxYBounds() {
 		return height;
 	}
+	
+	public int getLevelHeight() {
+		return background.getHeight();
+	}
 
 }
