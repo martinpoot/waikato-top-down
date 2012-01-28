@@ -25,6 +25,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	protected ImageHelper imagehelper;
 	private int health;
 	private int maxHeight;
+	protected float strength;
 
 	
 	public Player(GameEngine engine, GameContainer container, int bottomMargin, String graphicsLocation,Level level, int reservedBottomSpace) throws SlickException {
@@ -41,6 +42,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		
 		shotLast = 0;
 		health = Damages.playerHealth;
+		strength = 1.0f;
 	}
 
 	@Override
@@ -113,6 +115,20 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 	@Override
 	public int getHealth() {
 		return health;
+	}
+
+	public float getAlpha() {
+		return imagehelper.getAlpha();
+	}
+
+	public void setAlpha(float f) {
+
+		imagehelper.setAlpha(f);
+		
+	}
+
+	public float getStrength() {
+		return strength;
 	}
 
 	

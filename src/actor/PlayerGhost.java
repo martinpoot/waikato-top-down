@@ -14,8 +14,6 @@ import actor.movehelpers.PlayerBulletMoveHelper;
 
 public class PlayerGhost extends Player {
 	
-	private float strength;
-
 	public PlayerGhost(GameEngine engine, GameContainer container,
 			int bottomMargin, String graphicsLocation, Level level, float strength) throws SlickException {
 		super(engine, container, bottomMargin, graphicsLocation, level, 0);

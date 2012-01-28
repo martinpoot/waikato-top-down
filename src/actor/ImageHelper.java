@@ -64,7 +64,7 @@ public class ImageHelper {
 		
 	}
 	
-	public float getAlpha(float alpha) {
+	public float getAlpha() {
 		return sprite.getAlpha();
 	}
 
