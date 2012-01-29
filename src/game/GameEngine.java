@@ -112,6 +112,9 @@ public class GameEngine extends BasicGame{
 			for(Bullet bullet : entityManager.getBullets()) {
 				bullet.render(g);
 			}
+			for (TextBubble tb : entityManager.getTextBubbles()) {
+				tb.render(g);
+			}
 			player.render(g);
 			
 			statusBar.render(g);
@@ -212,6 +215,12 @@ public class GameEngine extends BasicGame{
 		for (InputFeeder feeder : entityManager.getInputFeeders()) {
 			feeder.poll(delta);
 		}
+		List<TextBubble> bubbles = new ArrayList<TextBubble>();
+		bubbles.addAll(entityManager.getTextBubbles());
+		for (TextBubble bubble : bubbles) {
+			if (bubble.canBeDiscarded()) entityManager.destroyBubble(bubble);
+			else bubble.reduceAlpha();
+		}
 		
 		if(level.isTransitionStarted()) {
 			player.setAlpha(player.getAlpha()-Speeds.playerFadeRate);
@@ -255,12 +264,14 @@ public class GameEngine extends BasicGame{
 		
 	}
 	
-	private void detectCollisions(Turret turret) {
+	// See if the player has run into anything
+	private void detectCollisions(Turret turret) throws SlickException {
 		if (turret.getBoundingBox().intersects(player.getBoundingBox())) {
 			turret.takeDamage(Damages.collisionModifier * Damages.playerDamage);
 			player.takeDamage(Damages.collisionModifier * Damages.turretDamage);
 			if (turret.getHealth() < 0) {
 				entityManager.destroyTurret(turret);
+				entityManager.addTextBubble(new TextBubble(Resources.effectKaboomYellowSmall, turret.getX(), turret.getY()));
 				SoundEffectManager.getInstance().playerCollision();
 			}
 			if (player.getHealth() < 0) {
@@ -270,7 +281,7 @@ public class GameEngine extends BasicGame{
 		}
 	}
 
-	private void detectCollisions(Bullet bullet) {
+	private void detectCollisions(Bullet bullet) throws SlickException {
 		Rectangle bulletBB = bullet.getBoundingBox();
 		if (bullet.isPlayerFired()) {
 			List<Turret> turrets = new ArrayList<Turret>();
@@ -285,6 +296,7 @@ public class GameEngine extends BasicGame{
 						score +=turret.getScoreValue();
 						entityManager.destroyTurret(turret);
 						SoundEffectManager.getInstance().turretExplosion();
+						entityManager.addTextBubble(new TextBubble(Resources.effectBoomGreenSmall, turret.getX(), turret.getY()));
 					}
 					entityManager.destroyBullet(bullet);
 				}

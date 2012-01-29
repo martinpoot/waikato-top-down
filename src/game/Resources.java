@@ -20,6 +20,12 @@ public class Resources {
 	public final static String playerBullet = "res/bullet-purple.png";
 	public final static String ghostBullet = "res/bullet-yellow.png";
 	public final static String turretBullet = "res/bullet-green.png";
+	
+	// Speech bubble effects
+	public final static String effectBoomGreenSmall = "res/boom-green-small.png";
+	public final static String effectBoomPurpleSmall = "res/boom-purple-small.png";
+	public final static String effectKaboomYellowSmall = "res/kaboom-yellow-small.png";
+	
 
 	public final static String turretShootingDown = "res/turret-shooting-down.png";
 	public final static String turretShootingUp = "res/turret-shooting-up.png";
