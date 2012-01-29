@@ -101,20 +101,23 @@ public class GameEngine extends BasicGame{
 		}
 		else if (state == GameState.PLAYING) {
 			level.render(g);
+			for (Turret turret : entityManager.getTurrets()) {
+				turret.render(g);
+			}
+			for (TextBubble tb : entityManager.getTextBubbles()) {
+				tb.render(g);
+			}
+			for(Bullet bullet : entityManager.getBullets()) {
+				bullet.render(g);
+			}
 			
 			for(Player ghost : ghosts) {
 				ghost.render(g);
 			}
 			
-			for (Turret turret : entityManager.getTurrets()) {
-				turret.render(g);
-			}
-			for(Bullet bullet : entityManager.getBullets()) {
-				bullet.render(g);
-			}
-			for (TextBubble tb : entityManager.getTextBubbles()) {
-				tb.render(g);
-			}
+			
+			
+			
 			player.render(g);
 			
 			statusBar.render(g);
