@@ -72,7 +72,7 @@ public class Turret implements IDrawable, IShooter, IDamageable, IMoveable {
 		
 		float angle = (float) playerBB.sub(centrePos).getTheta();
 		
-		imagehelper.setGraphicsLocation(Resources.turretShootingRight);
+		imagehelper.setGraphicsLocation(Resources.turret);
 		imagehelper.rotate(angle);
 		
 		/*if (Math.abs(xdiff) > Math.abs(ydiff)) { // closest on x 
