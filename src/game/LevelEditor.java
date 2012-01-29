@@ -44,7 +44,7 @@ public class LevelEditor extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		turrets = new ArrayList<Turret>();
-		referenceBox = new Turret(null, container, Resources.turretShootingDown, null, 0, 
+		referenceBox = new Turret(null, container, Resources.turret, null, 0, 
 				0, ScrollingMovehelper.getInstance()).getBoundingBox();
 	}
 
@@ -54,7 +54,7 @@ public class LevelEditor extends BasicGame {
 		referenceBox.setCenterX(container.getInput().getMouseX());
 		referenceBox.setCenterY(container.getInput().getMouseY());
 		if (container.getInput().isMouseButtonDown(0)) {
-			Turret newTurret = new Turret(null, container, Resources.turretShootingDown, null, (float)container.getInput().getMouseX() - referenceBox.getWidth() / 2, 
+			Turret newTurret = new Turret(null, container, Resources.turret, null, (float)container.getInput().getMouseX() - referenceBox.getWidth() / 2, 
 					(float)container.getInput().getMouseY() - referenceBox.getHeight() / 2, ScrollingMovehelper.getInstance());
 			boolean collided = false;
 			for (Turret t : turrets) {			
@@ -66,7 +66,7 @@ public class LevelEditor extends BasicGame {
 			if (!collided) turrets.add(newTurret);	
 		}
 		else if (container.getInput().isMouseButtonDown(1)) {	// rightclick
-			Turret newTurret = new Turret(null, container, Resources.turretShootingDown, null, (float)container.getInput().getMouseX() - referenceBox.getWidth() / 2, 
+			Turret newTurret = new Turret(null, container, Resources.turret, null, (float)container.getInput().getMouseX() - referenceBox.getWidth() / 2, 
 					(float)container.getInput().getMouseY() - referenceBox.getHeight() / 2, ScrollingMovehelper.getInstance());
 			Turret collidedTurret = null;
 			for (Turret t : turrets) {			

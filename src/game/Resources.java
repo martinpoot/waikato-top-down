@@ -1,7 +1,6 @@
 package game;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.Hashtable;
 
 import org.newdawn.slick.Image;
@@ -27,10 +26,7 @@ public class Resources {
 	public final static String effectKaboomYellowSmall = "res/kaboom-yellow-small.png";
 	
 
-	public final static String turretShootingDown = "res/turret-shooting-down.png";
-	public final static String turretShootingUp = "res/turret-shooting-up.png";
-	public final static String turretShootingRight = "res/turret-shooting-right.png";
-	public final static String turretShootingLeft = "res/turret-shooting-left.png";
+	public final static String turret = "res/turret.png";
 	public final static String background = "res/background.png";
 	public final static String player = "res/player.png";
 	public final static String ghost = "res/ghost.png";

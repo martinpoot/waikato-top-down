@@ -71,7 +71,7 @@ public class EntityManager {
 					String[] bits = line.split(",");
 					int x = Integer.parseInt(bits[0]);
 					int y = Integer.parseInt(bits[1]) - (level.getMaxYBounds() * (numLevelsRequired + 1));
-					Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
+					Turret newTurret = new Turret(engine, container, Resources.turret, level, x, y, 
 							ScrollingMovehelper.getInstance());
 					inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
 					turrets.add(newTurret);
@@ -83,38 +83,6 @@ public class EntityManager {
 			}
 		}
 	}
-	
-	public void generateRandomTurrets(int numTurrets) throws SlickException {
-		for (int i = 0; i < numTurrets; i++) {
-			float x = (float)(Math.random() * level.getMaxXBounds());
-			float y = -(float)(Math.random() * (level.getEnemySpawnHeight() - level.getMaxYBounds()));
-			
-			Turret newTurret = new Turret(engine, container, Resources.turretShootingDown, level, x, y, 
-					ScrollingMovehelper.getInstance());
-			
-			if (newTurret.getBoundingBox().getMaxX() > level.getMaxXBounds()) {
-				newTurret.setX(newTurret.getX() - newTurret.getBoundingBox().getWidth());
-			}
-			
-			boolean intersects = false;
-			
-			for (Turret turret: turrets) {
-				if (turret.getBoundingBox().intersects(newTurret.getBoundingBox())) {
-					intersects = true;
-					break;
-				}
-			}
-			
-			if (!intersects) {
-				turrets.add(newTurret);
-				inputFeeders.add(new ScrollingInputFeeder(newTurret, container));
-			}
-			else {
-				i--;
-			}
-		}
-	}
-
 	
 	/**
 	 * Destroy things that shouldn't exist anymore.
