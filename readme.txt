@@ -1,4 +1,4 @@
-This is the submission to the Global Game Jam by the team "Top Down". The title of the game is "Dreams that haunt you".
+This is the submission to the Global Game Jam by the team "Top Down". The title of the game is "Memories that haunt you".
 
 Here you are in your shiny new plane, flying along peacefully as the beautiful countryside unrolls itself under you. Sure, there's the odd turret shooting at you, but of course you know how to deal with those!
 
@@ -22,11 +22,11 @@ The sound effects are recorded using Audacity using the sound talents of one of 
 
 
 Installation instructions:
-Rename copy the release directory to a name that you like and a destination where it makes sense.
+Rename the release directory to a name that you like and copy it to a destination where it makes sense.
 
 Run the game executable.
 
-The Global Game Jam distributable only supports Microsoft Windows, OS X and linux versions will probably be added after the submission deadline.
+The Global Game Jam distributable only supports Microsoft Windows; OS X and Linux versions will probably be added after the submission deadline.
 
 
 Authors:
