@@ -24,6 +24,8 @@ public class EntityManager {
 	private List<InputFeeder> inputFeeders;
 	private List<Turret> turrets;
 	private List<Bullet> bullets;
+	private List<TextBubble> textBubbles;
+	
 	private GameContainer container;
 	private Level level;
 	private GameEngine engine;
@@ -39,6 +41,7 @@ public class EntityManager {
 		turrets = new ArrayList<Turret>();
 		bullets = new ArrayList<Bullet>();
 		inputFeeders = new ArrayList<InputFeeder>();
+		textBubbles = new ArrayList<TextBubble>();
 	}
 
 	public void addBullet(Bullet bullet) {
@@ -147,6 +150,13 @@ public class EntityManager {
 
 	}
 	
+	public void addTextBubble(TextBubble bubble) {
+		textBubbles.add(bubble);
+	}
+
+	public void destroyBubble(TextBubble bubble) {
+		textBubbles.remove(bubble);
+	}
 	
 	
 	// Getters
@@ -169,6 +179,10 @@ public class EntityManager {
 
 	public void destroyTurret(Turret turret) {
 		turrets.remove(turret);
+	}
+
+	public List<TextBubble> getTextBubbles() {
+		return textBubbles;
 	}
 
 }
