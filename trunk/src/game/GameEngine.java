@@ -132,6 +132,7 @@ public class GameEngine extends BasicGame{
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		container.setShowFPS(false);
 		splashScreen = new SplashScreen(this, container, Resources.splashImage);
 		gameOverScreen = new GameOverScreen(this, container, Resources.gameOverImage);
 		
@@ -349,6 +350,7 @@ public class GameEngine extends BasicGame{
 		         AppGameContainer app = 
 					new AppGameContainer(new GameEngine("Memories that haunt you"),800,600,false);
 		         app.setVSync(true);
+		         
 		         app.start();
 	}
 
