@@ -18,7 +18,7 @@ public class PlayerGhost extends Player {
 			int bottomMargin, String graphicsLocation, Level level, float strength) throws SlickException {
 		super(engine, container, bottomMargin, graphicsLocation, level, 0);
 		this.strength = strength;
-		this.imagehelper.setAlpha(strength);
+		
 	}
 
 	@Override

@@ -84,6 +84,6 @@ public class Level implements IDrawable {
 
 	
 	public boolean isTransitionStarted() {
-		return start>=200;
+		return start<=300;
 	}
 }
