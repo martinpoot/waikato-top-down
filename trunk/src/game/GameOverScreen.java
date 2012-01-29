@@ -54,18 +54,13 @@ public class GameOverScreen implements IDrawable {
 	}
 
 	private List<String> getDigitLocations(int value) {
-		List<String> digitLocations = new ArrayList<String>(); 
-		int workingValue = value;
-		while (true) {
-			int remainder = workingValue % 10;
-			digitLocations.add(Resources.getLocationForDigit(remainder));
-			workingValue -= remainder;
-			workingValue = workingValue / 10;
-			if (workingValue <= 1) {
-				break;
-			}
+		List<String> digitLocations = new ArrayList<String>();
+		String valueString = String.valueOf(value);
+		char[] chars = valueString.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			int digit = Integer.valueOf("" + chars[i]);
+			digitLocations.add(Resources.getLocationForDigit(digit));
 		}
-		Collections.reverse(digitLocations);
 		return digitLocations;
 	}
 
