@@ -2,6 +2,8 @@ package game;
 
 import java.io.File;
 import java.util.Hashtable;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -34,6 +36,22 @@ public class Resources {
 	public static final String statusBackground = "res/status-background.png";
 	public static final String splashImage = "res/splash-image.png";
 	public static final String gameOverImage = "res/game-over-image.png";
+	public static final String score = "res/score.png";
+	public static final String health = "res/health.png";
+	
+	private static final Map<Integer, String> locationForDigit = new IdentityHashMap<Integer, String>();
+	static {
+		locationForDigit.put(0, "res/zero.png");
+		locationForDigit.put(1, "res/one.png");
+		locationForDigit.put(2, "res/two.png");
+		locationForDigit.put(3, "res/three.png");
+		locationForDigit.put(4, "res/four.png");
+		locationForDigit.put(5, "res/five.png");
+		locationForDigit.put(6, "res/six.png");
+		locationForDigit.put(7, "res/seven.png");
+		locationForDigit.put(8, "res/eight.png");
+		locationForDigit.put(9, "res/nine.png");
+	}
 	
 	
 	public static final String soundTurretHit = "res/music/recorded/popp.ogg";//"res/music/turret-hit.ogg";
@@ -47,7 +65,9 @@ public class Resources {
 	// File resources
 	public static final String levelDirectory = "res/levels/";
 	
-	
+	public static final String getLocationForDigit(int digit) {
+		return locationForDigit.get(digit);
+	}
 	
 	
 	public static File getFile(String fileResource) {

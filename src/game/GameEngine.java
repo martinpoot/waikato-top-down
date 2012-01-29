@@ -71,6 +71,8 @@ public class GameEngine extends BasicGame{
 			break;
 		case PLAYING:
 			state = GameState.GAME_OVER;
+			gameOverScreen.setFinalScore(score);
+			gameOverScreen.setFinalLevel(round + 1);
 			break;
 		}
 	}
