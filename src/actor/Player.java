@@ -43,6 +43,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		shotLast = 0;
 		health = Damages.playerHealth;
 		strength = 1.0f;
+		setAlpha(0);
 	}
 
 	@Override
@@ -84,18 +85,20 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 
 	@Override
 	public void shoot(int delta) {
-		if (shotLast >= 1000 / Speeds.playerFireSpeed){
-			Vector2f dir = new Vector2f(0, -1);
-			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 10);
-			try {
-				engine.registerBullet(new Bullet(container, Resources.playerBullet, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
-						true, Damages.playerDamage));
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if(getAlpha() >= strength) {
+			if (shotLast >= 1000 / Speeds.playerFireSpeed){
+				Vector2f dir = new Vector2f(0, -1);
+				Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 10);
+				try {
+					engine.registerBullet(new Bullet(container, Resources.playerBullet, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
+							true, Damages.playerDamage));
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				SoundEffectManager.getInstance().playerShoots();
+				shotLast = 0;
 			}
-			SoundEffectManager.getInstance().playerShoots();
-			shotLast = 0;
 		}
 	}
 

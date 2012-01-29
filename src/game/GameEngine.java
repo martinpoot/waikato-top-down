@@ -215,6 +215,19 @@ public class GameEngine extends BasicGame{
 		
 		if(level.isTransitionStarted()) {
 			player.setAlpha(player.getAlpha()-Speeds.playerFadeRate);
+			for(PlayerGhost ghost : ghosts) {
+				ghost.setAlpha(ghost.getAlpha() - Speeds.gostFadeRate);
+			}
+		} else {
+			if(player.getAlpha() <= player.getStrength()) {
+				player.setAlpha(player.getAlpha()+Speeds.playerFadeRate);
+			}
+			for(PlayerGhost ghost : ghosts) {
+				if(ghost.getAlpha() <= ghost.getStrength()) {
+					ghost.setAlpha(ghost.getAlpha()+Speeds.gostFadeRate);
+				}
+			}
+			
 		}
 		
 		if(towersGone && levelFinished) {
