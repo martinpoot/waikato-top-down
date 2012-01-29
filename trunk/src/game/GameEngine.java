@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -163,6 +164,9 @@ public class GameEngine extends BasicGame{
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
+		if (container.getInput().isKeyDown(Keyboard.KEY_ESCAPE)) {
+			container.exit();
+		}
 		
 		
 		switch(state) {
