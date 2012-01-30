@@ -41,12 +41,13 @@ Game Technology:
 The game is written in Oracle Java using the slick2d and lwjgl libraries.
 
 Art:
-All art are hand drawn and scanned by the team.
+All art is hand drawn and scanned by the team.
 
 Music:
-The game music is March of the Innocents, from the album AELECTRIC by Mac of BIOnighT. 
-It is licensed under an Attribution-Non Commercial-No Derivatives version of the
-3.0 Creative Commons license and can be downloaded from
+The game music is March of the Innocents, from the album AElectroid by Mac of
+BIOnighT.  It is licensed under an Attribution-Non Commercial-No Derivatives
+version of the 3.0 Creative Commons license and can be downloaded from
+http://www.macvibes.com/CDAELECTROIDE.html or from
 http://www.jamendo.com/en/track/391159 
 
 Sounds:
