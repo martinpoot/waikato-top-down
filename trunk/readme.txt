@@ -12,7 +12,10 @@ join present you to defeat the turrets all the better? Or does past you have
 something more sinister in mind? And what will happen when you finally make it
 to the city again?
 
+A game created during the Global Gam Jam 2012.
+
 http://code.google.com/p/waikato-top-down
+http://globalgamejam.org/2012/memories-haunt-you
 
 Installation instructions:
 ==========================
