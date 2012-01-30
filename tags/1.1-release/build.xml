@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Memories that haunt you">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Memories that haunt you.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/jogg-0.0.7.jar"/>
+        <pathelement location="lib/jorbis-0.0.15.jar"/>
+        <pathelement location="lib/lwjgl.jar"/>
+        <pathelement location="lib/slick-util.jar"/>
+        <pathelement location="lib/slick.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="res">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="lib">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="*.dll"/>
+                <exclude name="*.so"/>
+                <exclude name="*.jnilib"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Memories that haunt you.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="res"/>
+            <classpath refid="Memories that haunt you.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="lib"/>
+            <exclude name="*.dll"/>
+            <exclude name="*.so"/>
+            <exclude name="*.jnilib"/>
+             <classpath refid="Memories that haunt you.classpath"/>
+        </javac>
+    </target>
+    <target depends="build" name="run">
+        <java classname="game.GameEngine" failonerror="true" fork="yes">
+            <sysproperty key="java.library.path" value="lib"/>
+            <classpath refid="Memories that haunt you.classpath"/>
+        </java>
+    </target>
+</project>
