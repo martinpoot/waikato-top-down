@@ -73,7 +73,7 @@ public class ImageHelper {
 	}
 
 	public void setGraphicsLocation(String location) throws SlickException {
-		sprite = new Image(location);
+		sprite = Resources.getSprite(location);
 	}
 
 	public void rotate(float angle) {
