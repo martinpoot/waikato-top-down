@@ -2,9 +2,9 @@ package game;
 
 public class Speeds {
 	
-	public static float boost = 1.5f;
+	public static final float boost = 1.5f;
 
-	public static float textBubbleDeathRate = 0.1f;
+	public static final float textBubbleDeathRate = 0.1f;
 
 	public static final float playerBulletSpeed = 500.0f * boost;
 	

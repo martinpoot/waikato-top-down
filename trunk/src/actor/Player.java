@@ -38,7 +38,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		maxHeight = level.getMaxYBounds() - reservedBottomSpace;
 		
 		imagehelper.setTopY((float) (maxHeight-imagehelper.getHeight()));
-		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2));
+		imagehelper.setTopX((float) ((level.getMaxXBounds()-imagehelper.getWidth())/2.0));
 		
 		shotLast = 0;
 		health = Damages.playerHealth;
@@ -88,7 +88,7 @@ public class Player implements IDrawable,IMoveable, IShooter, IDamageable {
 		if(getAlpha() >= strength) {
 			if (shotLast >= 1000 / Speeds.playerFireSpeed){
 				Vector2f dir = new Vector2f(0, -1);
-				Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 10);
+				Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2.0f, imagehelper.getTopY() - 10);
 				try {
 					engine.registerBullet(new Bullet(container, Resources.playerBullet, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
 							true, Damages.playerDamage));

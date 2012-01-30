@@ -13,6 +13,6 @@ public class Damages {
 	public static final int turretHealth = 10;
 	public static final int playerHealth = 200;
 	
-	public static boolean turretCollision = true;
+	public static final boolean turretCollision = true;
 	
 }

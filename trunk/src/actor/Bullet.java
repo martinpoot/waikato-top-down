@@ -48,11 +48,11 @@ public class Bullet implements IDrawable {
 	}
 	
 	public float getX() {
-		return imagehelper.getTopX() + (imagehelper.getWidth() / 2);
+		return imagehelper.getTopX() + (imagehelper.getWidth() / 2.0f);
 	}
 	
 	public float getY() {
-		return imagehelper.getTopY() + (imagehelper.getHeight() / 2);
+		return imagehelper.getTopY() + (imagehelper.getHeight() / 2.0f);
 	}
 
 	public boolean isPlayerFired() {

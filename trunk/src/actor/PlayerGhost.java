@@ -31,7 +31,7 @@ public class PlayerGhost extends Player {
 	public void shoot(int delta) {
 		if (shotLast >= 1000 / Speeds.playerFireSpeed){
 			Vector2f dir = new Vector2f(0, -1);
-			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2, imagehelper.getTopY() - 1);
+			Vector2f startPos = new Vector2f(imagehelper.getTopX()+imagehelper.getWidth()/2.0f, imagehelper.getTopY() - 1);
 			try {
 				engine.registerBullet(new Bullet(container, Resources.ghostBullet, level, startPos,dir,PlayerBulletMoveHelper.getInstance(), 
 						true, Damages.ghostDamage * strength));
